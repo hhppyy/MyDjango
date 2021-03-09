@@ -19,8 +19,17 @@ from django.urls import path
 from django.conf.urls import url
 from MyApp import views
 
+
+"""
+path:匹配绝对路径
+url:支持正则，django2.x版本推荐
+re_path:支持正则，django1.x版本推荐
+"""
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^hello$', views.hello),
     url(r'^login/$', views.login_demo),
+    #path('yuyu/archive/<year>/<month>.html', views.archive),
+    url(r'^yuyu/archive/(?P<year>[0-9]{4})/(?P<month>[0-9]{2}).html$', views.archive),
 ]

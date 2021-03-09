@@ -5,10 +5,20 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 
 
+def archive(request, month, year):
+    res = {
+        "code": 0,
+        "msg": "成功success!",
+        "datas": [{
+            "month": month,
+            "year": year
+        }]
+    }
+
+    return JsonResponse(res,json_dumps_params={'ensure_ascii':False})
+
 def login_demo(request):
     return render(request, "login.html")
-
-
 
 
 
