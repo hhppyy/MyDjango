@@ -5,6 +5,11 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 
 
+def lianjie(request):
+    return render(request, "MB_params.html", {'year':"2020"})
+
+
+
 def archive(request, month, year):
     res = {
         "code": 0,
