@@ -7,13 +7,16 @@
 </head>
 <body>
 <p>这是一个跨域链接</p>
+<!-- 应用url地址 -->
 <a href="login/" target="_blank">新窗口打开</a>
 <p>显示模板参数</p>
 <div>
+    <!-- 设置参数 -->
     <p>日期显示：{{ year }}</p>
 </div>
 <div>
     <p>引用url名称</p>
+    <!-- 引用url名称 -->
     <a href="{% url 'login' %}" target="_blank">新窗口打开</a>
 </div>
 </body>
