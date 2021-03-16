@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>for取值</title>
+</head>
+<body>
+{# {% for name in name_list %}{% endfor %}} 循环取值#}
+{% for name in name_list %}
+
+<h1>
+    <span>{{ name.type }}</span>
+</h1>
+<!-- 数据组为空或没有找到时，给定默认值 -->
+{% empty %}
+    <span>无标签</span>
+<!-- 结束 -->
+{% endfor %}
+</body>
+</html>

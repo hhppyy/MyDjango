@@ -5,6 +5,46 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 
 
+def looplist(request):
+    name_list = [
+        {
+            "type": "科普读物",
+            "value": ["宇宙知识", "百科知识", "科学世界", "生物世界"]
+        },
+        {
+            "type": "计算结/网络",
+            "value": ["Java", "Python", "Php"]
+        },
+        {
+            "type": "建筑",
+            "value": ["标准/规范", "室内设计", "建筑科学", "建筑文化"]
+        }
+    ]
+    context= {"name_list": name_list}
+    return render(request, "forloop_params.html", context=context)
+
+def no_navlist(request):
+    context = {"name_list1": []}
+    return render(request, "for_params.html", context=context)
+
+def navlist(request):
+    name_list = [
+        {
+            "type": "科普读物",
+            "value": ["宇宙知识", "百科知识", "科学世界", "生物世界"]
+        },
+        {
+            "type": "计算结/网络",
+            "value": ["Java", "Python", "Php"]
+        },
+        {
+            "type": "建筑",
+            "value": ["标准/规范", "室内设计", "建筑科学", "建筑文化"]
+        }
+    ]
+    context= {"name_list": name_list}
+    return render(request, "for_params.html", context=context)
+
 def personalView(request):
     """
     render(request, template_name, context=None, content_type=None, status=None, using=None)

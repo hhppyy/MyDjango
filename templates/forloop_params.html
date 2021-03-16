@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>forloop取值</title>
+</head>
+<body>
+
+{% for name in name_list %}
+
+<h1>
+    <span>{{ name.type }}</span>
+</h1>
+    {% for n in name.value %}
+        <span>
+        <!-- forloop取值 -->
+        <!-- if判断结尾加endif -->
+        {{ n  }}{% if not forloop.last %} | {% endif %}
+        </span>
+    {% endfor %}
+{% empty %}
+    <span>无标签</span>
+
+{% endfor %}
+</body>
+</html>

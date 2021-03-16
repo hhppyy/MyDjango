@@ -34,4 +34,7 @@ urlpatterns = [
     url(r'^yuyu/archive/(?P<year>[0-9]{4})/(?P<month>[0-9]{2}).html$', views.archive),
     url(r'^lianjie$', views.lianjie),
     url(r'^personal$', views.personalView),
+    url(r'^navlist$', views.navlist),
+    url(r'^no_navlist$', views.no_navlist),
+    url(r'^looplist$', views.looplist),
 ]
