@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>personl</title>
+</head>
+<body>
+<div>
+    <!-- 字符串直接取值 -->
+    <h1>{{ name }}</h1>
+    <div>
+        <p><span>姓名：</span>{{ n_name }}</p>
+        <p><span>年龄：</span>{{ age }}</p>
+        <!-- list对象通过下标取值 -->
+        <p><span>感兴趣的技术：</span>{{ fancy.0 }}、{{ fancy.1 }}、{{ fancy.2 }}</p>
+    </div>
+</div>
+
+<h1>通过字典对象取值</h1>
+
+<div>
+    <p><span>博客地址：</span>
+        <!-- dict对象，通过下标.key取出对应的value值 -->
+        <a href="{{ blog.url }}" target="_blank">{{ blog.url }}</a>
+    </p>
+    <p><span>头像</span>
+        <img src="{{ blog.img }}">
+    </p>
+</div>
+
+<h1>通过类的属性、方法取值</h1>
+<p><span>名称：</span>{{ myblog.name }}</p>
+<p><span>年龄：</span>{{ myblog.age }}</p>
+<p><span>关注：</span>{{ myblog.guanzhu }}</p>
+<p><span>粉丝：</span>{{ myblog.fensi }}</p>
+</body>
+</html>

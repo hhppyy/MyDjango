@@ -19,7 +19,6 @@ from django.urls import path
 from django.conf.urls import url
 from MyApp import views
 
-
 """
 path:匹配绝对路径
 url:支持正则，django2.x版本推荐
@@ -31,7 +30,8 @@ urlpatterns = [
     url(r'^hello$', views.hello),
     # url 设置名称，方便在其他地方引用
     url(r'^login/$', views.login_demo, name="login"),
-    #path('yuyu/archive/<year>/<month>.html', views.archive),
+    # path('yuyu/archive/<year>/<month>.html', views.archive),
     url(r'^yuyu/archive/(?P<year>[0-9]{4})/(?P<month>[0-9]{2}).html$', views.archive),
-    url(r'^lianjie$',views.lianjie),
+    url(r'^lianjie$', views.lianjie),
+    url(r'^personal$', views.personalView),
 ]
