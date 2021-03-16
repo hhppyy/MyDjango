@@ -5,6 +5,25 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 
 
+def iflist(request):
+    name_list = [
+        {
+            "type": "科普读物",
+            "value": ["宇宙知识", "百科知识", "科学世界", "生物世界"]
+        },
+        {
+            "type": "计算结/网络",
+            "value": ["Java", "Python", "Php"]
+        },
+        {
+            "type": "建筑",
+            "value": ["标准/规范", "室内设计", "建筑科学", "建筑文化"]
+        }
+    ]
+    context= {"name_list": name_list}
+    return render(request, "if_params.html", context=context)
+
+
 def looplist(request):
     name_list = [
         {

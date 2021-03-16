@@ -4,3 +4,4 @@
 2021-03-11 第四次提交：MB_params.html、views.py、urls.py 添加注释
 2021-03-16 第五次提交：添加personal.html、render方法参数详解、模板取值方法（字符串、数字、list、dict、类的实例属性和方法）
 2021-03-16 第六次提交：{% for %} {% endfor %}取值、empty空标签、forloop取值 添加for_params.thml、forloop_params.thml
+2021-03-16 第七次提交：if语句判断、添加if_params.html

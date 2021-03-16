@@ -37,4 +37,5 @@ urlpatterns = [
     url(r'^navlist$', views.navlist),
     url(r'^no_navlist$', views.no_navlist),
     url(r'^looplist$', views.looplist),
+    url(r'^iflist$', views.iflist),
 ]
