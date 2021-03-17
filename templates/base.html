@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>
+    <h1>菜鸟教程 -- 学的不仅是技术，更是梦想！</h1>
+    <p>
+        <span>首页 | HTML | CSS | Javascript | jQuery | Bootstrap | Python3</span>
+    </p>
+</div>
+<!-- 标签 block...endblock: 父模板中的预留区域，
+该区域留给子模板填充差异性的内容，不同预留区域名字不能相同。 -->
+{% block navlist %} {% endblock navlist %}
+
+{% block bodytext %} {% endblock bodytext %}
+
+{% block advert %} {% endblock advert %}
+
+<div>
+    <p>底部导航链接 版权声明</p>
+</div>
+</body>
+</html>

@@ -5,6 +5,9 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 
 
+def extend_l(request):
+    return render(request, "extends_base.html")
+
 def iflist(request):
     name_list = [
         {

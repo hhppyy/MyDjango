@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>extends继承</title>
+</head>
+<body>
+<!-- extends 继承base.html 模板 -->
+{% extends 'base.html' %}
+
+{% block bodytext %}
+    <h1>子模板继承</h1>
+    <p>子模板如果没有设置父模板预留区域的内容，则使用在父模板设置的默认内容，当然也可以都不设置，就为空。</p>
+    <p>子模板使用标签 extends 继承父模板：</p>
+{% endblock bodytext %}
+
+
+</body>
+</html>
