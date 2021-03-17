@@ -6,7 +6,7 @@
 2021-03-16 第六次提交：{% for %} {% endfor %}取值、empty空标签、forloop取值 添加for_params.thml、forloop_params.thml
 2021-03-16 第七次提交：if语句判断、添加if_params.html
 2021-03-17 第八次提交：模板继承block...endblock；添加base.html、extend_base.html
-
+2021-03-17 第九次提交：添加图片git_1.png
 
 
 
