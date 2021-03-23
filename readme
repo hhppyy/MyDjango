@@ -7,6 +7,6 @@
 2021-03-16 第七次提交：if语句判断、添加if_params.html
 2021-03-17 第八次提交：模板继承block...endblock；添加base.html、extend_base.html
 2021-03-23 第九次提交：重写父级模板、include导入公共模板。添加write_father.html、include_common.html、common.html
-
+2021-03-23 第十次提交：过滤器：default、add、list（取值第一个、最后一个、长度）、jion拼接、添加default_value.html
 
 

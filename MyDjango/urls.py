@@ -41,4 +41,5 @@ urlpatterns = [
     url(r'^extend_l$', views.extend_l),
     url(r'^write_father$', views.write_father),
     url(r'^include_common$', views.include_common),
+    url(r'^default_value$', views.default_value),
 ]

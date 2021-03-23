@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>过滤器</title>
+</head>
+<body>
+<div>
+    <!-- value为False时给定默认值 -->
+    <p class="text_grey"><span>姓名：</span>{{ n_name | default:"nothing" }}</p>
+    <!-- 给value加一个数字 add -->
+    <p class="text_grey"><span>年龄：</span>{{ age | add:"2" }}</p>
+    <p class="text_grey"><span>第一个值：</span>{{ fancy | first }}</p>
+    <p class="text_grey"><span>最后一个值：</span>{{ fancy | last}}</p>
+    <p class="text_grey"><span>长度：</span>{{ fancy | length }}</p>
+    <p class="text_grey"><span>jion拼接：</span>{{ fancy | join:"|" }}</p>
+    <p class="text_grey"><span>感兴趣的技术：</span>{{ fancy.0 }}、{{ fancy.1 }}、{{ fancy.2 }}</p>
+</div>
+</body>
+</html>
