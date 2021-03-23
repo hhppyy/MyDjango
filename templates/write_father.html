@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>重写父级</title>
+</head>
+<body>
+<!-- extends_base.html 继承base.html 模板 -->
+<!-- write_father 继承extends_base.html 模板 -->
+{% extends 'extends_base.html' %}
+
+{% block bodytext %}
+    <h1>重写父级</h1>
+{% endblock bodytext %}
+
+
+</body>
+</html>

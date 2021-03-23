@@ -39,4 +39,6 @@ urlpatterns = [
     url(r'^looplist$', views.looplist),
     url(r'^iflist$', views.iflist),
     url(r'^extend_l$', views.extend_l),
+    url(r'^write_father$', views.write_father),
+    url(r'^include_common$', views.include_common),
 ]

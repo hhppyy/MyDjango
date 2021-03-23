@@ -5,6 +5,18 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 
 
+def include_common(request):
+    context = {
+        "title": "导入公共模板"
+    }
+    return render(request, 'include_common.html', context=context)
+
+def write_father(request):
+    context = {
+        "title": "重写父级模板"
+    }
+    return render(request, "write_father.html", context=context)
+
 def extend_l(request):
     return render(request, "extends_base.html")
 
