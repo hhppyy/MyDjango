@@ -74,13 +74,34 @@ WSGI_APPLICATION = 'MyDjango.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
+
+"""
+settings.py 文件中找到 DATABASES 配置项, django默认连接sqllite。
+ENGINE：是指连接数据库驱动的名称,有以下几种情况：
+
+django.db.backends.postgresql 连接 PostgreSQL
+django.db.backends.mysql 连接 mysql
+django.db.backends.sqlite3 连接 sqlite
+django.db.backends.oracle 连接 oracle
+"""
+
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.mysql',  # 或者使用 mysql.connector.django
+        'NAME': 'my_django1',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST':'123.56.231.107',
+        'PORT':'3309',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
