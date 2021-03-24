@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自定义标签和过滤器</title>
+</head>
+<body>
+<!-- load 导入过滤器文件 -->
+{% load myfilter %}
+<!-- load 导入标签文件 -->
+{% load mytags %}
+
+<!-- 调用自定义标签 -->
+<h1>当前时间：{% current_time %}</h1>
+<div>
+    <!-- 调用自定义过滤器 -->
+    <p class="text_grey"><span>姓名：</span>{{ n_name |replace:'+'}}</p>
+</div>
+
+</body>
+</html>

@@ -4,6 +4,20 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 
+def my_filter(request):
+    context = {
+        "name": "莫使娇躯空对月",
+        "n_name": "宇宇+",
+        "age": 18,
+        "fancy": ["python", "django", "pytest"],
+        "blog": {
+            "url": "https://home.cnblogs.com/u/xiaoyujuan",
+            "img": "https://pic.cnblogs.com/avatar/1001971/20190703151818.png"
+        }
+    }
+    return render(request, 'my_filter.html', context=context)
+
+
 def default_value(request):
     context = {
         "name": "莫使娇躯空对月",
@@ -16,10 +30,6 @@ def default_value(request):
         }
     }
     return render(request, 'default_value.html', context=context)
-
-
-
-
 
 
 def include_common(request):

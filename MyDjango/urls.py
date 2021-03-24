@@ -42,4 +42,5 @@ urlpatterns = [
     url(r'^write_father$', views.write_father),
     url(r'^include_common$', views.include_common),
     url(r'^default_value$', views.default_value),
+    url(r'^my_filter$', views.my_filter),
 ]

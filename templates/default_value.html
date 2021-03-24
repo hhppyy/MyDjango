@@ -10,11 +10,20 @@
     <p class="text_grey"><span>姓名：</span>{{ n_name | default:"nothing" }}</p>
     <!-- 给value加一个数字 add -->
     <p class="text_grey"><span>年龄：</span>{{ age | add:"2" }}</p>
+    <!-- first 取list第一个值 -->
     <p class="text_grey"><span>第一个值：</span>{{ fancy | first }}</p>
+    <!-- last 取list最后一个值 -->
     <p class="text_grey"><span>最后一个值：</span>{{ fancy | last}}</p>
+    <!-- length list长度 -->
     <p class="text_grey"><span>长度：</span>{{ fancy | length }}</p>
+    <!-- 通过jion 将list元素用|连接诶 -->
     <p class="text_grey"><span>jion拼接：</span>{{ fancy | join:"|" }}</p>
+    <!-- 取值list值 -->
     <p class="text_grey"><span>感兴趣的技术：</span>{{ fancy.0 }}、{{ fancy.1 }}、{{ fancy.2 }}</p>
+    <!-- 这是一个html -->
+    <p class="text_grey"><span>HTML：</span>{{ html }}</p>
+    <!-- 告诉django 这段代码是安全的 -->
+    <p class="text_grey"><span>HTML：</span>{{ blog.url | safe}}</p>
 </div>
 </body>
 </html>
