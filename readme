@@ -10,3 +10,4 @@
 2021-03-23 第十次提交：过滤器：default、add、list（取值第一个、最后一个、长度）、jion拼接、添加default_value.html
 2021-03-24 第十一次提交：自定义过滤器和标签，添加templatetags目录-添加myfilter.py和mytags.py，添加my_filter.html
 2021-03-24 第十二次提交：orm模型
+2021-03-24 第十三次提交：orm模型，建表-遗留default设置不生效
