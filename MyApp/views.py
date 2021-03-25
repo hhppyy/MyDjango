@@ -4,6 +4,24 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.http import JsonResponse
 
+from .models import Stendent
+
+
+def get_sel(request):
+    """get查询"""
+    if request.method == "GET":
+        qq_num = request.GET.get('qq', '')  # 如果没获取到，默认空字符
+        print(qq_num)
+    try:
+        info = Stendent.objects.get(qq=qq_num)  # 查询的结果是对象
+    except:
+        print('未查到结果，qq=%s' % qq_num)
+        info = None
+    print('不能查询出，查询结果：%s' % info)
+    context = {"info": info}
+    return render(request, 'get_sel.html', context=context)
+
+
 def my_filter(request):
     context = {
         "name": "莫使娇躯空对月",
@@ -38,14 +56,17 @@ def include_common(request):
     }
     return render(request, 'include_common.html', context=context)
 
+
 def write_father(request):
     context = {
         "title": "重写父级模板"
     }
     return render(request, "write_father.html", context=context)
 
+
 def extend_l(request):
     return render(request, "extends_base.html")
+
 
 def iflist(request):
     name_list = [
@@ -62,7 +83,7 @@ def iflist(request):
             "value": ["标准/规范", "室内设计", "建筑科学", "建筑文化"]
         }
     ]
-    context= {"name_list": name_list}
+    context = {"name_list": name_list}
     return render(request, "if_params.html", context=context)
 
 
@@ -81,12 +102,14 @@ def looplist(request):
             "value": ["标准/规范", "室内设计", "建筑科学", "建筑文化"]
         }
     ]
-    context= {"name_list": name_list}
+    context = {"name_list": name_list}
     return render(request, "forloop_params.html", context=context)
+
 
 def no_navlist(request):
     context = {"name_list1": []}
     return render(request, "for_params.html", context=context)
+
 
 def navlist(request):
     name_list = [
@@ -103,8 +126,9 @@ def navlist(request):
             "value": ["标准/规范", "室内设计", "建筑科学", "建筑文化"]
         }
     ]
-    context= {"name_list": name_list}
+    context = {"name_list": name_list}
     return render(request, "for_params.html", context=context)
+
 
 def personalView(request):
     """
@@ -128,7 +152,8 @@ def personalView(request):
             "img": "https://pic.cnblogs.com/avatar/1001971/20190703151818.png"
         }
     }
-    #类对象取值
+
+    # 类对象取值
     class Myblog():
         def __init__(self):
             self.name = "娇躯"
@@ -141,7 +166,7 @@ def personalView(request):
             return 1000
 
     myblog = Myblog()
-    context["myblog"] = myblog #类的实例化添加进入context
+    context["myblog"] = myblog  # 类的实例化添加进入context
 
     return render(request, "personal.html", context=context)
 

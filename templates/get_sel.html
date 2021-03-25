@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>get查询</title>
+</head>
+<body>
+
+<p>查询姓名和年龄</p>
+<form action="" method="get">
+    请输入你的qq号：<input type="text" name="qq"> <br>
+    <br>
+    <input type="submit" value="提交">
+</form>
+<p>查询结果</p>
+<p>昵称：{{ info.name }}</p>
+<p>年龄：{{ info.age }}</p>
+<p>地址：{{ info.add }}</p>
+<p>性别：{{ info.sex }}</p>
+<p>邮箱：{{ info.email }}</p>
+<p>qq：{{ info.qq }}</p>
+</body>
+</html>

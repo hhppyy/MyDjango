@@ -1,7 +1,16 @@
 from django.db import models
-
-# Create your models here.
 import django.utils.timezone as timezone
+# Create your models here.
+
+class Stendent(models.Model):
+    name = models.CharField(max_length=30)
+    age = models.IntegerField()
+    qq = models.IntegerField()
+    sex = models.CharField(max_length=50)
+    add = models.CharField(max_length=30)
+    email = models.CharField(max_length=50)
+
+
 class TestTimer(models.Model):
     creattime = models.DateTimeField(default=timezone.now)
     # 创建时间

@@ -43,4 +43,5 @@ urlpatterns = [
     url(r'^include_common$', views.include_common),
     url(r'^default_value$', views.default_value),
     url(r'^my_filter$', views.my_filter),
+    url(r'^get_sel$', views.get_sel),
 ]
