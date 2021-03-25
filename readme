@@ -11,3 +11,15 @@
 2021-03-24 第十一次提交：自定义过滤器和标签，添加templatetags目录-添加myfilter.py和mytags.py，添加my_filter.html
 2021-03-24 第十二次提交：orm模型
 2021-03-24 第十三次提交：orm模型，建表-遗留default设置不生效
+2021-03-24 第十四次提交：django shell 交互模式、添加django_shell文件
+
+
+
+
+
+
+
+
+
+
+

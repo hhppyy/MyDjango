@@ -1,0 +1,53 @@
+django shell 交互模式
+
+cd E:\MyDjango
+
+添加数据
+#导入MyApp项目下models文件中PersonUser类
+from MyApp.models import PersonUser
+#添加数据，info接收
+info=PersonUser.objects.create(uid=1,name='test1')
+#保存
+info.save()
+#退出
+exit()
+
+查询数据
+#导入MyApp项目下models文件中PersonUser类
+from MyApp.models import PersonUser
+#查询数据，返回数据对象
+a=PersonUser.objects.get(uid=2)
+#通过name属性（字段名）查询value值
+a.name
+
+
+删除数据
+#导入MyApp项目下models文件中PersonUser类
+from MyApp.models import PersonUser
+#查询数据，返回数据对象
+a=PersonUser.objects.get(uid=2)
+#通过name属性（字段名）查询value值
+a.name
+#删除数据
+a.delete()
+
+
+更新数据
+from MyApp.models import PersonUser
+#添加数据，info接收
+info=PersonUser.objects.create(uid=2,name='test1')
+#保存
+info.save()
+a=PersonUser.objects.get(uid=2)
+a.name
+#更新a.name的值
+a.name='test2'
+a.save()
+#再次查询，已经修改成新值
+a.name
+
+
+
+
+
+
