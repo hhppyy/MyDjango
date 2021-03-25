@@ -12,12 +12,15 @@
     <br>
     <input type="submit" value="提交">
 </form>
-<p>查询结果</p>
-<p>昵称：{{ info.name }}</p>
-<p>年龄：{{ info.age }}</p>
-<p>地址：{{ info.add }}</p>
-<p>性别：{{ info.sex }}</p>
-<p>邮箱：{{ info.email }}</p>
-<p>qq：{{ info.qq }}</p>
+<!-- 对结果进行判断，查询出结果展示，无结果不展示 -->
+{% if info %}
+    <p>查询结果</p>
+    <p>昵称：{{ info.name }}</p>
+    <p>年龄：{{ info.age }}</p>
+    <p>地址：{{ info.add }}</p>
+    <p>性别：{{ info.sex }}</p>
+    <p>邮箱：{{ info.email }}</p>
+    <p>qq：{{ info.qq }}</p>
+{% endif %}
 </body>
 </html>

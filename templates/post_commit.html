@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>post提交</title>
+</head>
+<body>
+<p>添加个人信息</p>
+<form action="" method="post">
+    {% csrf_token %}
+    <p>
+        用户名：<input type="text" id="id_username" name="name" required="required">
+    </p>
+    <p>年龄：<input type="text" id="id_username" name="age" required="required"></p>
+    <p>qq号：<input type="text" id="id_username" name="qq" required="required"></p>
+    <p>地址：<input type="text" id="id_username" name="qq" required="required"></p>
+    <p>性别：<input type="text" id="id_username" name="qq" required="required"></p>
+    <p>邮箱：<input type="text" id="id_username" name="qq" required="required"></p>
+    <br>
+    <input type="submit" value="提交">
+</form>
+{% if msg %}
+    <p>返回结果：{{ msg }}</p>
+{% endif %}
+</body>
+</html>

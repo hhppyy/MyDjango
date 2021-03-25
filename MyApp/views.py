@@ -7,6 +7,53 @@ from django.http import JsonResponse
 from .models import Stendent
 
 
+def post_commit(request):
+    # Form表单提交
+    context = {
+        "msg": ""
+    }
+    if request.method == "GET":
+        # 判断如果是get请求，返回页面
+        return render(request, "post_commit.html", context=context)
+    elif request.method == "POST":
+        # 判断post请求
+        # request.POST.get获取前端页面输入值，如果没有获取到默认为空
+        name = request.POST.get('name', '')
+        age = request.POST.get('age', '')
+        sex = request.POST.get('sex', '')
+        qq = request.POST.get('qq', '')
+        add = request.POST.get('add', '')
+        email = request.POST.get('email', '')
+        print(qq)
+        infoObj = Stendent.objects.filter(qq=qq)
+        print(len(infoObj))
+        if infoObj:
+            context['msg'] = "qq已经存在，请更换"
+            return render(request, 'post_commit.html', context=context)
+        else:
+            #不存在就添加
+            #第一种
+            # info = Stendent()
+            # info.name = name
+            # info.age = age
+            # info.qq = qq
+            # info.add = add
+            # info.email = email
+            # info.sex = sex
+            #第二种
+            info = Stendent(name=name,
+                            age=age,
+                            add=add,
+                            qq=qq,
+                            sex=sex,
+                            email=email)
+            info.save()
+            context['msg'] = '提交成功'
+            return render(request, 'post_commit.html', context=context)
+    else:
+        return render(request, 'post_commit.html', context=context)
+
+
 def get_sel(request):
     """get查询"""
     if request.method == "GET":

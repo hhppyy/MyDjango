@@ -20,6 +20,50 @@ a=PersonUser.objects.get(uid=2)
 #通过name属性（字段名）查询value值
 a.name
 
+get查询
+查询的3种情况
+from MyApp.models import Stendent
+a=Stendent.objects.get(qq='123')
+
+0个结果
+MyApp.models.DoesNotExist: Stendent matching query does not exist.
+1个结果
+>>> a.name
+'test1'
+>>>
+1个以上结果
+MyApp.models.MultipleObjectsReturned: get() returned more than one Stendent -- i
+t returned 2!
+
+filter查询
+from MyApp.models import Stendent
+a=Stendent.objects.filter(qq='123')
+0个结果
+>>> a=Stendent.objects.filter(qq='1111')
+>>> a
+<QuerySet []>
+
+1个结果
+a=Stendent.objects.filter(qq='123')
+>>> a.name
+>>> a
+<QuerySet [<Stendent: Stendent object (1)>]>
+>>> a[0]
+<Stendent: Stendent object (1)>
+>>> a[0].name
+'test1'
+
+1个以上结果
+>>> a=Stendent.objects.filter(qq='1231')
+>>> a
+<QuerySet [<Stendent: Stendent object (2)>, <Stendent: Stendent object (10)>]>
+>>> a[0].name
+'test11'
+>>> a[1].name
+'test111'
+
+
+
 
 删除数据
 #导入MyApp项目下models文件中PersonUser类

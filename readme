@@ -17,7 +17,7 @@
 2021-03-24 第十三次提交：orm模型，建表-遗留default设置不生效
 2021-03-24 第十四次提交：django shell 交互模式、添加django_shell文件
 2021-03-24 第十五次提交：Form表单GET请求、添加get_sel.htnl、sql文件
-
+2021-03-24 第十六次提交：Form表单POST请求、添加post_commit.html文件
 
 
 
