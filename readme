@@ -18,6 +18,12 @@
 2021-03-24 第十四次提交：django shell 交互模式、添加django_shell文件
 2021-03-24 第十五次提交：Form表单GET请求、添加get_sel.htnl、sql文件
 2021-03-24 第十六次提交：Form表单POST请求、添加post_commit.html文件
+2021-03-24 第十七次提交：Form表单POST请求，update数据、修改数据库datetime与真实时间相差8小时、
+    解决DateTimeField创建的时间字段保存到MySQL的datatime(6)格式问题、
+    添加common.py中邮箱格式校验(正则匹配)、
+    数据库清表重新同步问题、
+
+
 
 
 

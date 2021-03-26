@@ -1,6 +1,16 @@
 from django.db import models
 import django.utils.timezone as timezone
+
+
+
+
+#设置datetime、time类型同步到数据库不是datetime(6)
+from django.db.backends.mysql.base import DatabaseFeatures # 关键设置
+DatabaseFeatures.supports_microsecond_precision = False # 关键设置
+
+
 # Create your models here.
+
 
 class Stendent(models.Model):
     name = models.CharField(max_length=30)
@@ -9,15 +19,17 @@ class Stendent(models.Model):
     sex = models.CharField(max_length=50)
     add = models.CharField(max_length=30)
     email = models.CharField(max_length=50)
-
+    creattime = models.DateTimeField(auto_now_add=True)
+    # 创建时间
+    updatetime = models.DateTimeField(auto_now=True)
 
 class TestTimer(models.Model):
-    creattime = models.DateTimeField(default=timezone.now)
+    creattime = models.DateTimeField(auto_now_add=True)
     # 创建时间
     updatetime = models.DateTimeField(auto_now=True)
     # 更新时间
-    date = models.DateField(default=timezone.now)
-    time = models.TimeField(default=timezone.now)
+    date = models.DateField(auto_now=True)
+    time = models.TimeField(auto_now=True)
 
 
 class TestHan(models.Model):

@@ -44,5 +44,6 @@ urlpatterns = [
     url(r'^default_value$', views.default_value),
     url(r'^my_filter$', views.my_filter),
     url(r'^get_sel$', views.get_sel),
-    url(r'^post_commit$', views.post_commit),
+    url(r'^post_insert$', views.post_insert),
+    url(r'^post_update$', views.post_update),
 ]

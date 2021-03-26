@@ -3,12 +3,63 @@ from django.shortcuts import render
 # Create your views here.
 from django.http import HttpResponse
 from django.http import JsonResponse
-
+from .base.common import validateEmail
 from .models import Stendent
 
 
-def post_commit(request):
-    # Form表单提交
+def post_update(request):
+    # Form表单修改数据
+    context = {
+        "msg": ""
+    }
+
+    if request.method == "GET":
+        return render(request, 'post_commit.html', context=context)
+
+    elif request.method == "POST":
+        name = request.POST.get('name', '')
+        age = request.POST.get('age', '')
+        qq = request.POST.get('qq', '')
+        sex = request.POST.get('sex', '')
+        add = request.POST.get('add', '')
+        email = request.POST.get('email', '')
+
+        # 以qq作为唯一条件进行查询
+        info = Stendent.objects.filter(qq=qq)
+        new_name = Stendent.objects.filter(name=name)
+        new_email = Stendent.objects.filter(email=email)
+
+        if not info:
+            context['msg'] = 'qq号不存在，请更换'
+            return render(request, 'post_commit.html', context=context)
+        elif new_name:
+            context['msg'] = "用户名已经存在，请更换"
+            return render(request, 'post_commit.html', context=context)
+        # 判断邮箱是否已经存在
+        elif new_email[0].qq != qq:
+            context['msg'] = "邮箱已经存在，请更换"
+            return render(request, 'post_commit.html', context=context)
+        # 判断前端输入的邮箱格式是否正确
+        elif not validateEmail(email):
+            context['msg'] = "请输入正确的邮箱格式"
+            return render(request, 'post_commit.html', context=context)
+        else:
+            # filter查询出是list，取第一个
+            info[0].name = name
+            info[0].age = age
+            info[0].sex = sex
+            info[0].add = add
+            info[0].email = email
+            info[0].save()
+
+            context['msg'] = '修改成功'
+            return render(request, 'post_commit.html', context=context)
+    else:
+        return render(request, 'post_commit.html', context=context)
+
+
+def post_insert(request):
+    # Form表单添加数据
     context = {
         "msg": ""
     }
@@ -25,14 +76,33 @@ def post_commit(request):
         add = request.POST.get('add', '')
         email = request.POST.get('email', '')
         print(qq)
-        infoObj = Stendent.objects.filter(qq=qq)
-        print(len(infoObj))
-        if infoObj:
+        new_qq = Stendent.objects.filter(qq=qq)
+        print(len(new_qq))
+        new_name = Stendent.objects.filter(name=name)
+        print(len(new_name))
+        new_email = Stendent.objects.filter(email=email)
+        print(len(new_email))
+        email_l = validateEmail(email)
+        # 判断用户名是否已经存在
+        if new_name:
+            context['msg'] = "用户名已经存在，请更换"
+            return render(request, 'post_commit.html', context=context)
+        # 判断qq是否已经存在
+        elif new_qq:
             context['msg'] = "qq已经存在，请更换"
             return render(request, 'post_commit.html', context=context)
+        # 判断邮箱是否已经存在
+        elif new_email:
+            context['msg'] = "邮箱已经存在，请更换"
+            return render(request, 'post_commit.html', context=context)
+        # 判断前端输入的邮箱格式是否正确
+        elif not email_l:
+            context['msg'] = "请输入正确的邮箱格式"
+            return render(request, 'post_commit.html', context=context)
+
         else:
-            #不存在就添加
-            #第一种
+            # 不存在就添加
+            # 第一种
             # info = Stendent()
             # info.name = name
             # info.age = age
@@ -40,7 +110,7 @@ def post_commit(request):
             # info.add = add
             # info.email = email
             # info.sex = sex
-            #第二种
+            # 第二种
             info = Stendent(name=name,
                             age=age,
                             add=add,

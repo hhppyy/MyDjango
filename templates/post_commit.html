@@ -7,15 +7,17 @@
 <body>
 <p>添加个人信息</p>
 <form action="" method="post">
+{#    <!--CSRF, Cross Site Request Forgery, 跨站点伪造请求-->#}
+{#    <!--POST请求一般在form表单下加个标签  {% csrf_token %}-->#}
     {% csrf_token %}
     <p>
         用户名：<input type="text" id="id_username" name="name" required="required">
     </p>
     <p>年龄：<input type="text" id="id_username" name="age" required="required"></p>
     <p>qq号：<input type="text" id="id_username" name="qq" required="required"></p>
-    <p>地址：<input type="text" id="id_username" name="qq" required="required"></p>
-    <p>性别：<input type="text" id="id_username" name="qq" required="required"></p>
-    <p>邮箱：<input type="text" id="id_username" name="qq" required="required"></p>
+    <p>地址：<input type="text" id="id_username" name="add" required="required"></p>
+    <p>性别：<input type="text" id="id_username" name="sex" required="required"></p>
+    <p>邮箱：<input type="text" id="id_username" name="email" required="required"></p>
     <br>
     <input type="submit" value="提交">
 </form>
