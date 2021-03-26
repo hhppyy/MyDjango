@@ -33,11 +33,29 @@ def post_update(request):
             context['msg'] = 'qq号不存在，请更换'
             return render(request, 'post_commit.html', context=context)
         elif new_name:
-            context['msg'] = "用户名已经存在，请更换"
+            if new_name[0].name == name:
+                info[0].name = name
+                info[0].age = age
+                info[0].sex = sex
+                info[0].add = add
+                info[0].email = email
+                info[0].save()
+                context['msg'] = "修改成功"
+            else:
+                context['msg'] = "用户名已经存在，请更换"
             return render(request, 'post_commit.html', context=context)
         # 判断邮箱是否已经存在
-        elif new_email[0].qq != qq:
-            context['msg'] = "邮箱已经存在，请更换"
+        elif new_email:
+            if new_email[0].email == email:
+                info[0].name = name
+                info[0].age = age
+                info[0].sex = sex
+                info[0].add = add
+                info[0].email = email
+                info[0].save()
+                context['msg'] = "修改成功"
+            else:
+                context['msg'] = "邮箱已经存在，请更换"
             return render(request, 'post_commit.html', context=context)
         # 判断前端输入的邮箱格式是否正确
         elif not validateEmail(email):
