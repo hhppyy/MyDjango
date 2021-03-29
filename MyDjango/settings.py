@@ -95,11 +95,11 @@ django.db.backends.oracle 连接 oracle
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 或者使用 mysql.connector.django
-        'NAME': 'xx',
-        'USER': 'xx',
+        'NAME': 'xxx',
+        'USER': 'xxx',
         'PASSWORD': 'xxx',
-        'HOST':'xxxx',
-        'PORT':'xx',
+        'HOST':'xxx',
+        'PORT':'xxx',
     }
 }
 
