@@ -13,15 +13,15 @@ def post_del(request):
         "msg": ""
     }
     if request.method == "GET":
-        return render(request,'post_commit.html',context=context)
+        return render(request, 'post_commit.html', context=context)
     elif request.method == "POST":
         qq = request.POST.get('qq', '')
         info = Stendent.objects.filter(qq=qq)
         if not info:
             context['msg'] = 'qq号不存在，请重新输入'
-            return render(request,'post_commit.html',context=context)
+            return render(request, 'post_commit.html', context=context)
         else:
-            #删除
+            # 删除
             # 删除name=yoyo1的数据
             # info = PersonInfo.objects.get(name='yoyo1')
             # info.delete()
@@ -32,12 +32,10 @@ def post_del(request):
 
             info.delete()
             context['msg'] = '删除成功'
-            return render(request,'post_commit.html',context=context)
+            return render(request, 'post_commit.html', context=context)
 
     else:
-        return render(request,'post_commit.html',context=context)
-
-
+        return render(request, 'post_commit.html', context=context)
 
 
 def post_update(request):
