@@ -7,6 +7,30 @@ from .base.common import validateEmail
 from .models import Stendent
 
 
+def post_del(request):
+    """删除操作"""
+    context = {
+        "msg": ""
+    }
+    if request.method == "GET":
+        return render(request,'post_commit.html',context=context)
+    elif request.method == "POST":
+        qq = request.POST.get('qq', '')
+        info = Stendent.objects.filter(qq)
+        if not info:
+            context['msg'] = 'qq号不存在，请重新输入'
+            return render(request,'post_commit.html',context=context)
+        else:
+            info.delete()
+            context['msg'] = '删除成功'
+            return render(request,'post_commit.html',context=context)
+
+    else:
+        return render(request,'post_commit.html',context=context)
+
+
+
+
 def post_update(request):
     # Form表单修改数据
     context = {

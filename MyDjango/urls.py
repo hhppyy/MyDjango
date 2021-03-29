@@ -46,4 +46,5 @@ urlpatterns = [
     url(r'^get_sel$', views.get_sel),
     url(r'^post_insert$', views.post_insert),
     url(r'^post_update$', views.post_update),
+    url(r'^post_del$', views.post_del),
 ]
