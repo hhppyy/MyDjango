@@ -18,6 +18,7 @@ from django.urls import path
 
 from django.conf.urls import url
 from MyApp import views
+import xadmin
 
 """
 path:匹配绝对路径
@@ -26,7 +27,8 @@ re_path:支持正则，django1.x版本推荐
 """
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('xadmin/', xadmin.site.urls), #xadmin
+    path('admin/', admin.site.urls),   #admin
     url(r'^hello$', views.hello),
     # url 设置名称，方便在其他地方引用
     url(r'^login/$', views.login_demo, name="login"),

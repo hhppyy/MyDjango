@@ -11,10 +11,15 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import sys
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # print(BASE_DIR)#E:\MyDjango
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
+
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -38,6 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',       #消息框架
     'django.contrib.staticfiles',    #管理静态文件框架
     'MyApp',                         #应用APP
+    'xadmin',                        # 新添加
+    'crispy_forms',                  # 新添加
 ]
 
 MIDDLEWARE = [

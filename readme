@@ -25,11 +25,22 @@
 2021-03-29 第十八次提交：Form表单POST请求，删除数据，添加视图、url--可以删除
 2021-03-30 第十九次提交：admin.py、创建管理员账号、登录后台、设置显示中文、__str__、__doc__、Meta类、
     注册表、添加列表字段展示及中文显示、添加搜索输入框
+2021-03-30 第二十次提交：#设置首页、标题、登录页面、设置默认可编辑字段、排序
+    xadmin管理页面--添加extra_apps目录
+        注册app
+            'xadmin',       # 新添加
+            'crispy_forms', # 新添加
+        配置setting：
+            import sys
+            sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
+            sys.path.insert(0, os.path.join(BASE_DIR, 'extra_apps'))
+        配置url
+            import xadmin
+            path('xadmin/', xadmin.site.urls), #xadmin
 
-
-
-
-
+        同步数据库
+            python manage.py makemigrations
+            python manage.py migrate
 
 
 
