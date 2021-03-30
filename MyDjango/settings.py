@@ -31,13 +31,13 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'MyApp',
+    'django.contrib.admin',          #管理站点
+    'django.contrib.auth',           #认证系统
+    'django.contrib.contenttypes',   #用于 内容类型的框架
+    'django.contrib.sessions',       #会话框架
+    'django.contrib.messages',       #消息框架
+    'django.contrib.staticfiles',    #管理静态文件框架
+    'MyApp',                         #应用APP
 ]
 
 MIDDLEWARE = [
@@ -95,11 +95,11 @@ django.db.backends.oracle 连接 oracle
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 或者使用 mysql.connector.django
-        'NAME': 'xxx',
-        'USER': 'xxx',
-        'PASSWORD': 'xxx',
-        'HOST':'xxx',
-        'PORT':'xxx',
+        'NAME': 'my_django1',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST':'123.56.231.107',
+        'PORT':'3309',
     }
 }
 
@@ -125,17 +125,18 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-Hans'  #设置简体中文
 
 # TIME_ZONE = 'UTC'
-TIME_ZONE = 'Asia/Shanghai'
+TIME_ZONE = 'Asia/Shanghai' #设置中国时区
 
 USE_I18N = True
 
 USE_L10N = True
 
 # USE_TZ = True
-USE_TZ = False
+USE_TZ = False              #设置为False ,要不时间和数据库时间不一致
 
 
 # Static files (CSS, JavaScript, Images)

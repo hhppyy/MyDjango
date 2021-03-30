@@ -13,15 +13,31 @@ DatabaseFeatures.supports_microsecond_precision = False # 关键设置
 
 
 class Stendent(models.Model):
-    name = models.CharField(max_length=30)
-    age = models.IntegerField()
-    qq = models.IntegerField()
-    sex = models.CharField(max_length=50)
-    add = models.CharField(max_length=30)
-    email = models.CharField(max_length=50)
-    creattime = models.DateTimeField(auto_now_add=True)
+    """个人信息表"""
+    name = models.CharField(verbose_name='姓名',max_length=30)
+    age = models.IntegerField(verbose_name='年龄')
+    qq = models.IntegerField(verbose_name='qq号')
+    sex = models.CharField(verbose_name='性别',max_length=50)
+    add = models.CharField(verbose_name='地址',max_length=30)
+    email = models.CharField(verbose_name='邮箱',max_length=50)
+    creattime = models.DateTimeField(verbose_name='创建时间',auto_now_add=True)
     # 创建时间
-    updatetime = models.DateTimeField(auto_now=True)
+    updatetime = models.DateTimeField(verbose_name='更新时间',auto_now=True)
+
+    def __str__(self):
+        """返回一个字符串，当做这个对象的描写，返回一个对象的描述信息
+        self.__doc__为类的描述信息 --个人信息表
+        self.name为表中的name字段的值
+        """
+
+        return self.__doc__ + ":" + self.name
+
+    class Meta:
+        """verbose_name_plural属性是写在class Meta下的, class Meta嵌套在class PersonInfo里
+        在页面中MyApp中展示信息
+        """
+        verbose_name_plural = "个人信息表"
+
 
 class TestTimer(models.Model):
     creattime = models.DateTimeField(auto_now_add=True)
