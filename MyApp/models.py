@@ -2,14 +2,24 @@ from django.db import models
 import django.utils.timezone as timezone
 
 
-
-
 #设置datetime、time类型同步到数据库不是datetime(6)
 from django.db.backends.mysql.base import DatabaseFeatures # 关键设置
 DatabaseFeatures.supports_microsecond_precision = False # 关键设置
 
 
 # Create your models here.
+
+
+class Student(models.Model):
+    '''学生成绩'''
+    student_id = models.CharField(verbose_name='学生id',max_length=30)
+    name = models.CharField(verbose_name='姓名',max_length=30)
+    age = models.IntegerField(verbose_name='年龄')
+    score = models.IntegerField(verbose_name='分数')
+
+    class Meta:
+        verbose_name = "学生成绩表"
+        verbose_name_plural = verbose_name
 
 
 class Stendent(models.Model):

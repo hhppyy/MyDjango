@@ -26,7 +26,11 @@
 2021-03-30 第十九次提交：admin.py、创建管理员账号、登录后台、设置显示中文、__str__、__doc__、Meta类、
     注册表、添加列表字段展示及中文显示、添加搜索输入框
 2021-03-30 第二十次提交：#设置首页、标题、登录页面、设置默认可编辑字段、排序
+
     xadmin管理页面--添加extra_apps目录
+        xadmin在github的源码地址https://github.com/sshwsfc/xadmin
+        下载对应的django2分支代码。
+
         注册app
             'xadmin',       # 新添加
             'crispy_forms', # 新添加
@@ -42,7 +46,8 @@
             python manage.py makemigrations
             python manage.py migrate
 
-
+2021-03-31 第二十一次提交：admin装饰器注册表、
+    xadmin注册表、创建admin.py文件、每页显示条数list_per_page
 
 
 
