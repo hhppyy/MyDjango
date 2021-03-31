@@ -43,8 +43,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',       #消息框架
     'django.contrib.staticfiles',    #管理静态文件框架
     'MyApp',                         #应用APP
-    'xadmin',                        # 新添加
-    'crispy_forms',                  # 新添加
+    'xadmin',                        # 新添加配置xadmin
+    'crispy_forms',                  # 新添加配置xadmin
 ]
 
 MIDDLEWARE = [
@@ -102,11 +102,11 @@ django.db.backends.oracle 连接 oracle
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 或者使用 mysql.connector.django
-        'NAME': 'my_django1',
-        'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST':'123.56.231.107',
-        'PORT':'3309',
+        'NAME': 'xx',
+        'USER': 'xx',
+        'PASSWORD': 'xxx',
+        'HOST':'xxxx',
+        'PORT':'xx',
     }
 }
 
