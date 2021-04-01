@@ -9,6 +9,36 @@ DatabaseFeatures.supports_microsecond_precision = False # 关键设置
 
 # Create your models here.
 
+# 表关联 一对一 OneToOneField
+class Card(models.Model):
+    """银行卡_基本信息"""
+    card_id = models.CharField(verbose_name='卡号',max_length=30)
+    card_user = models.CharField(verbose_name='姓名',max_length=30)
+    create_time = models.DateTimeField(verbose_name='创建时间',auto_now_add=True)
+
+    def __str__(self):
+        return self.card_id
+    class Meta:
+        verbose_name = "银行卡_基本信息"
+        verbose_name_plural = "银行卡账户"
+
+class CardDetail(models.Model):
+    """银行卡详细信息"""
+    card = models.OneToOneField(Card,
+                                on_delete=models.CASCADE,
+                                verbose_name='卡号')
+    tel = models.CharField(verbose_name='手机号',max_length=30)
+    mail = models.CharField(verbose_name='邮箱',max_length=30)
+    city = models.CharField(verbose_name='城市',max_length=30)
+    address = models.CharField(verbose_name='详细地址',max_length=30)
+
+    def __str__(self):
+        return self.card.card_id
+    class Meta:
+        verbose_name = "账户_个人资料"
+        verbose_name_plural = verbose_name
+
+
 
 class Student(models.Model):
     '''学生成绩'''

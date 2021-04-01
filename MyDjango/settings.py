@@ -105,8 +105,8 @@ DATABASES = {
         'NAME': 'xx',
         'USER': 'xx',
         'PASSWORD': 'xxx',
-        'HOST':'xxxx',
-        'PORT':'xx',
+        'HOST': 'xxxx',
+        'PORT': 'xx',
     }
 }
 

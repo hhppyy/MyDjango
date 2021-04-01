@@ -48,6 +48,7 @@
 
 2021-03-31 第二十一次提交：admin装饰器注册表、
     xadmin注册表、创建admin.py文件、每页显示条数list_per_page
-
+2021-04-01 第二十二次提交：表关联 一对一 OneToOneField、
+    django shell 查询、将关联表字段展示在主表页面
 
 
