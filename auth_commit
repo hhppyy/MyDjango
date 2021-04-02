@@ -1,0 +1,50 @@
+auth 认证操作 django shell
+#注册的用户admin 是在user表中，所以需要导入user表
+>>> from django.contrib.auth.models import User
+#导入authenticate包
+>>> from django.contrib.auth import authenticate
+#使用正确账户、错误密码，user返回None
+>>> user = authenticate(username='admin',password='123456')
+>>> user
+>>>
+>>> print(user)
+None
+#使用正确账户、正确密码，user返回User用户名
+>>> user = authenticate(username='admin',password='han010657')
+>>> user
+<User: admin>
+>>>
+
+>>> new_user = User.objects.create_user(username='test',password='test',email='1234@qq,com')
+>>> new_user.save()
+
+>>> user = authenticate(username='test',password='test')
+>>> user
+<User: test>
+#设置新密码
+>>> user.set_password('123456')
+>>> user.save()
+#使用新密码登录认证
+>>> user = authenticate(username='test',password='123456')
+>>> user
+<User: test>
+>>>
+
+#输入错误的密码，user2返回空
+>>> user2 = authenticate(username='test',password='111111')
+>>> user2
+#设置密码，报错
+>>> user2.set_password('112112')
+Traceback (most recent call last):
+  File "<console>", line 1, in <module>
+AttributeError: 'NoneType' object has no attribute 'set_password'
+
+#判断user2返回不是None的时候进行修改密码
+>>> if user2 is not None:
+...     user2.set_password('123123')
+...     user2.save()
+...
+>>> user2=authenticate(username='test',password='123123')
+>>> user2
+
+>>>

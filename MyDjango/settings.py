@@ -102,11 +102,11 @@ django.db.backends.oracle 连接 oracle
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 或者使用 mysql.connector.django
-        'NAME': 'xx',
-        'USER': 'xx',
-        'PASSWORD': 'xxx',
-        'HOST': 'xxxx',
-        'PORT': 'xx',
+        'NAME': 'my_django1',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': '123.56.231.107',
+        'PORT': '3309',
     }
 }
 
@@ -150,3 +150,8 @@ USE_TZ = False              #设置为False ,要不时间和数据库时间不�
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# authenticate不会检测用户活跃状态
+AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
+
+

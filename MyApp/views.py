@@ -1,10 +1,69 @@
 from django.shortcuts import render
-
-# Create your views here.
 from django.http import HttpResponse
 from django.http import JsonResponse
+from django.http import HttpResponseRedirect
 from .base.common import validateEmail
+from django.contrib.auth import authenticate
+from django.contrib.auth import login
 from .models import Stendent
+from django.contrib.auth.models import User
+# Create your views here.
+
+
+def register(request):
+    """注册"""
+    if request.method == "POST":
+        username = request.POST.get('username','')
+        password = request.POST.get('password','')
+        email = request.POST.get('email','')
+        #查询是否有此用户
+        user_info = User.objects.filter(username=username)
+        email_info = User.objects.filter(email=email)
+        email_l = validateEmail(email)
+        if user_info:
+            #如果存在，说明已经注册过，给出提示
+            return render(request,'register.html',{'msg': '%s账号已经注册过了' %username})
+        else:
+            if email_info:
+                #检查邮箱是否存在
+                return render(request, 'register.html', {'msg': '%s邮箱已经存在，请更换' %email})
+            # 判断前端输入的邮箱格式是否正确
+            elif not email_l:
+                return render(request, 'register.html', {'msg': '请输入正确的邮箱格式'})
+            else:
+                #注册
+                user1 = User.objects.create_user(username=username,
+                                                 password=password,
+                                                 email=email)
+                user1.save()
+                return render(request,'register.html',{'msg':'注册成功'})
+    else:
+        return render(request,'register.html',{'msg': ''})
+
+def login_demo(request):
+    """登录"""
+    if request.method == "POST":
+        username = request.POST.get('username','')
+        password = request.POST.get('password','')
+        #登录认证
+        user = authenticate(username=username,password=password)
+        if user is not None:
+            if user.is_active: #判断用户是否有效 Ture 为有效，False为无效
+                #调用登录方法，添加session
+                login(request,user=user)
+                request.session['user'] = username
+                #302重定向至
+                # return HttpResponseRedirect('/login/')
+                return render(request, 'login.html', {'msg': '登录成功'})
+            else:
+                return render(request,'login.html',{'msg': '账号被锁定'})
+        else:
+            return render(request,'login.html',{'msg': '账号密码错误'})
+    else:
+        return render(request, "login.html",{'msg': ''})
+
+
+
 
 
 def post_del(request):
@@ -357,9 +416,7 @@ def archive(request, month, year):
     return JsonResponse(res, json_dumps_params={'ensure_ascii': False})
 
 
-def login_demo(request):
-    # render 渲染html
-    return render(request, "login.html")
+
 
 
 def hello(request):

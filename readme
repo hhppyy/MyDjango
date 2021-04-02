@@ -50,5 +50,12 @@
     xadmin注册表、创建admin.py文件、每页显示条数list_per_page
 2021-04-01 第二十二次提交：表关联 一对一 OneToOneField、
     django shell 查询、将关联表字段展示在主表页面
+2021-04-02 第二十三次提交：auth认证登录
+    修改login.html、新增register.html
+    修改login_demo视图、新增register视图
+    setting增加authenticate 不检测活跃用户设置
+    新增auth_commint文件--django shell 中auth新增、修改密码、验证登录
+    302重定向
+    Session机制、auth模块中login()登录方法、添加session
 
 
