@@ -32,7 +32,9 @@ urlpatterns = [
     url(r'^hello$', views.hello),
     # url 设置名称，方便在其他地方引用
     url(r'^login/$', views.login_demo, name="login"),
+    url(r'^accounts/login/$', views.login_demo, name="login"),
     url(r'^register/$', views.register),
+    url(r'^update_pwd/$', views.update_pwd),
     # path('yuyu/archive/<year>/<month>.html', views.archive),
     url(r'^yuyu/archive/(?P<year>[0-9]{4})/(?P<month>[0-9]{2}).html$', views.archive),
     url(r'^lianjie$', views.lianjie),
@@ -50,4 +52,5 @@ urlpatterns = [
     url(r'^post_insert$', views.post_insert),
     url(r'^post_update$', views.post_update),
     url(r'^post_del$', views.post_del),
+    url(r'^select_all/$', views.select_all),
 ]

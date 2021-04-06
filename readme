@@ -57,5 +57,10 @@
     新增auth_commint文件--django shell 中auth新增、修改密码、验证登录
     302重定向
     Session机制、auth模块中login()登录方法、添加session
+2021-04-06 第二十四次提交：添加cookie、cookie加密
+    session设置、访问权限@login_required
+    redirect重定向
+    新增update_pwd.html修改密码
+    添加/accounts/login/页面地址，指向登录页面
 
 

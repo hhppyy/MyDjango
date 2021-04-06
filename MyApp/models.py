@@ -9,6 +9,20 @@ DatabaseFeatures.supports_microsecond_precision = False # 关键设置
 
 # Create your models here.
 
+# class FileImages(models.Model):
+#     """文件和图片上传"""
+#     title = models.CharField(verbose_name='标题',max_length=30)
+#     # upload_to  参数设置图片和文件的存放路径
+#     image = models.ImageField(verbose_name="上传图片", upload_to="up_image", null=True,blank=True)
+#     files = models.FileField(verbose_name="上传文件", upload_to="up_file",null=True, blank=True)
+#     add_time = models.DateTimeField(verbose_name='添加时间',auto_now_add=True)
+#
+#     def __str__(self):
+#         return self.__doc__
+#     class Meta:
+#         verbose_name = "上传文件和图片"
+#         verbose_name_plural = verbose_name
+
 # 表关联 一对一 OneToOneField
 class Card(models.Model):
     """银行卡_基本信息"""

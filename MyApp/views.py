@@ -5,65 +5,129 @@ from django.http import HttpResponseRedirect
 from .base.common import validateEmail
 from django.contrib.auth import authenticate
 from django.contrib.auth import login
+from django.contrib.auth import logout
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import redirect
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.hashers import check_password
 from .models import Stendent
 from django.contrib.auth.models import User
+
+
 # Create your views here.
+
+@login_required
+def update_pwd(request):
+    res = ""
+    if request.method == "GET":
+        return render(request,'update_pwd.html',{'msg': res})
+    elif request.method == "POST":
+        pwd = request.POST.get('password','')
+        new_pwd = request.POST.get('new','')
+
+        #获取登录的用户名
+        username = request.user.username
+        print('当前登录的用户名为：%s' %username)
+
+        #校验密码对不对
+        user = authenticate(username=username,password=pwd)
+        if not user:
+            return render(request,'update_pwd.html',{'msg': '原密码输入错误，请重新输入'})
+        elif new_pwd == pwd:
+            return render(request,'update_pwd.html',{'msg': '新密码与旧密码一致，请重新输入'})
+        else:
+            #修改密码
+            user.set_password(new_pwd)
+            user.save()
+            # return render(request,'update_pwd.html',{'msg': '修改密码成功'})
+            # 修改成功后跳转至登录页面
+            return HttpResponseRedirect('/login/')
+
+def logoutView(request):
+    """退出登录"""
+    logout(request) #这个方法会将存储在用户session数据全部清空
+    return render(request,'login.html',{'msg': ""})
+
+# 添加访问权限设置
+@login_required
+def select_all(request):
+    """查询User全表信息，获取user、pwd、email信息"""
+    users = ""
+    pwds = ""
+    mails = ""
+    # 查询全表信息
+    res = User.objects.all()  # 迭代对象queryset
+
+    for i in res:
+        users += " " + i.username
+        pwds += " " + i.password
+        mails += " " + i.email
+
+    return HttpResponse("""<p>查询user结果：%s</p>
+                        <p>查询password结果：%s</p>
+                        <p>查询email结果：%s</p>""" % (users, pwds, mails))
 
 
 def register(request):
     """注册"""
     if request.method == "POST":
-        username = request.POST.get('username','')
-        password = request.POST.get('password','')
-        email = request.POST.get('email','')
-        #查询是否有此用户
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        email = request.POST.get('email', '')
+        # 查询是否有此用户
         user_info = User.objects.filter(username=username)
         email_info = User.objects.filter(email=email)
         email_l = validateEmail(email)
         if user_info:
-            #如果存在，说明已经注册过，给出提示
-            return render(request,'register.html',{'msg': '%s账号已经注册过了' %username})
+            # 如果存在，说明已经注册过，给出提示
+            return render(request, 'register.html', {'msg': '%s账号已经注册过了' % username})
         else:
             if email_info:
-                #检查邮箱是否存在
-                return render(request, 'register.html', {'msg': '%s邮箱已经存在，请更换' %email})
+                # 检查邮箱是否存在
+                return render(request, 'register.html', {'msg': '%s邮箱已经存在，请更换' % email})
             # 判断前端输入的邮箱格式是否正确
             elif not email_l:
                 return render(request, 'register.html', {'msg': '请输入正确的邮箱格式'})
             else:
-                #注册
+                # 注册
                 user1 = User.objects.create_user(username=username,
                                                  password=password,
                                                  email=email)
                 user1.save()
-                return render(request,'register.html',{'msg':'注册成功'})
+                return render(request, 'register.html', {'msg': '注册成功'})
     else:
-        return render(request,'register.html',{'msg': ''})
+        return render(request, 'register.html', {'msg': ''})
+
 
 def login_demo(request):
     """登录"""
     if request.method == "POST":
-        username = request.POST.get('username','')
-        password = request.POST.get('password','')
-        #登录认证
-        user = authenticate(username=username,password=password)
+        username = request.POST.get('username', '')
+        password = request.POST.get('password', '')
+        # 登录认证
+        user = authenticate(username=username, password=password)
         if user is not None:
-            if user.is_active: #判断用户是否有效 Ture 为有效，False为无效
-                #调用登录方法，添加session
-                login(request,user=user)
-                request.session['user'] = username
-                #302重定向至
-                # return HttpResponseRedirect('/login/')
-                return render(request, 'login.html', {'msg': '登录成功'})
+            if user.is_active:  # 判断用户是否有效 Ture 为有效，False为无效
+                # 调用登录方法，添加session
+                # login(request, user=user)
+                # request.session['user'] = username
+                # # 302重定向至
+                # return HttpResponseRedirect('/update_pwd/')
+                # return render(request, 'login.html', {'msg': '登录成功'})
+
+                #添加cookie
+                response = redirect("/update_pwd/")
+                # response.set_cookie('user',username)
+                response.set_signed_cookie('user', username, salt="salt")
+
+                return response
+
             else:
-                return render(request,'login.html',{'msg': '账号被锁定'})
+                return render(request, 'login.html', {'msg': '账号被锁定'})
         else:
-            return render(request,'login.html',{'msg': '账号密码错误'})
+            return render(request, 'login.html', {'msg': '账号密码错误'})
     else:
-        return render(request, "login.html",{'msg': ''})
-
-
-
+        return render(request, "login.html", {'msg': ''})
 
 
 def post_del(request):
@@ -414,9 +478,6 @@ def archive(request, month, year):
     # 返回json对象
     # json_dumps_params={'ensure_ascii':False} 防止中文乱码
     return JsonResponse(res, json_dumps_params={'ensure_ascii': False})
-
-
-
 
 
 def hello(request):

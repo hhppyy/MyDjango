@@ -102,11 +102,11 @@ django.db.backends.oracle 连接 oracle
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 或者使用 mysql.connector.django
-        'NAME': 'my_django1',
-        'USER': 'root',
-        'PASSWORD': '123456',
-        'HOST': '123.56.231.107',
-        'PORT': '3309',
+        'NAME': 'xx',
+        'USER': 'xx',
+        'PASSWORD': 'xxx',
+        'HOST': 'xxxx',
+        'PORT': 'xx',
     }
 }
 
@@ -153,5 +153,19 @@ STATIC_URL = '/static/'
 
 # authenticate不会检测用户活跃状态
 AUTHENTICATION_BACKENDS = ['django.contrib.auth.backends.AllowAllUsersModelBackend']
+
+
+# session 设置
+SESSION_COOLIE_NAME = "key"                # session的cookie保存在浏览器上的可以
+SESSION_COOKIE_PATH = "/"                  # session的cookie保存路径（默认）
+SESSION_COOKIE_DOMAIN = None               # session的cookie保存的域名（默认）
+SESSION_COOKIE_SECURE = False              # 是否https传输cookie（默认）
+SESSION_COOKIE_HTTPONLY = True             # 是否session的cookie只支持http传输（默认）
+SESSION_COOKIE_AGE = 1209600               # session的cookie失效时间（2周）（数字为秒）（默认）
+SESSION_EXPIRE_AT_BROWSER_CLOSE = True     # 是否关闭浏览器使得session过期（默认）
+SESSION_SAVE_EVERY_REQUEST = True          #是否每次请求都保存session，默认修改之后才保存（默认）
+# SESSION_EXPIRE_AT_BROWSER_CLOSE = True 和
+# SESSION_SAVE_EVERY_REQUEST = True 需同时设置否则会导致过期时间无法生效
+
 
 
