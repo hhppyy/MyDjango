@@ -41,7 +41,7 @@ urlpatterns = [
     # path('yuyu/archive/<year>/<month>.html', views.archive),
     url(r'^yuyu/archive/(?P<year>[0-9]{4})/(?P<month>[0-9]{2}).html$', views.archive),
     url(r'^lianjie$', views.lianjie),
-    url(r'^personal$', views.personalView),
+    url(r'^personal/$', views.personalView),
     url(r'^navlist$', views.navlist),
     url(r'^no_navlist$', views.no_navlist),
     url(r'^looplist$', views.looplist),
@@ -56,4 +56,8 @@ urlpatterns = [
     url(r'^post_update$', views.post_update),
     url(r'^post_del$', views.post_del),
     url(r'^select_all/$', views.select_all),
+    url(r'^stendent_api1/$', views.stendent_api1),
+    url(r'^stendent_api2/$', views.stendent_api2),
+    url(r'^stendent_api3/$', views.stendent_api3),
+    url(r'^stendent_api4/$', views.stendent_api4),
 ]

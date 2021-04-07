@@ -12,12 +12,96 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
 from .models import Stendent
 from django.contrib.auth.models import User
+import json
+from django.core import serializers
+from django.forms.models import model_to_dict
 
 
 # Create your views here.
 
+def stendent_api4(request):
+    if request.method == "GET":
+        infos = []
+        # values()不带参数默认输出全部字段
+        all = Stendent.objects.all().values()
+        #如果值输出name、qq
+        # all = Stendent.objects.all().values('name','qq')
+        res = {
+            "code": 0,
+            "msg": "success!",
+            "data": {
+                "info": list(all), #序列化输出
+                "total": len(infos)
+            }
+        }
+
+        return JsonResponse(res,json_dumps_params={'ensure_ascii': False})
+
+def stendent_api3(request):
+    if request.method == "GET":
+        infos = []
+        all = Stendent.objects.all()
+        for i in all:
+            j = 0
+            #model_to_dict 会跳过DateTimeFiled，手动添加
+            infos.append(model_to_dict(i))
+            #手动添加时间
+            infos[j]['createtime'] = i.creattime
+            infos[j]['updatetime'] = i.updatetime
+            j += 1
+        res = {
+            "code": 0,
+            "msg": "success!",
+            "data": {
+                "info": infos,
+                "total": len(infos)
+            }
+        }
+
+        return JsonResponse(res,json_dumps_params={'ensure_ascii': False})
+
+def stendent_api2(request):
+    if request.method == "GET":
+        datas = {}
+        all = Stendent.objects.all()
+        datas['infos'] = json.loads(serializers.serialize('json',all))
+        datas['total'] = len(all)
+        res = {
+            "code": 0,
+            "msg": "success!",
+            "data": datas
+        }
+        return JsonResponse(res,json_dumps_params={'ensure_ascii': False})
+
+def stendent_api1(request):
+    """查询用户信息"""
+    if request.method == "GET":
+        infos = []
+        all = Stendent.objects.all()
+        for i in all:
+            info = {
+                "name": i.name,
+                "age": i.age,
+                "qq": i.qq,
+                "sex": i.sex,
+                "add": i.add,
+                "email": i.email,
+                "createtime": i.creattime,
+                "updatetime": i.updatetime,
+            }
+            infos.append(info)
+        res = {
+            "code": 0,
+            "msg": "sussess!",
+            "data": {"infos": infos, # 序列化输出
+                     "totals": len(infos)
+                     }
+        }
+        return JsonResponse(res, json_dumps_params={'ensure_ascii': False})
+
 @login_required
 def update_pwd(request):
+    """修改密码"""
     res = ""
     if request.method == "GET":
         return render(request,'update_pwd.html',{'msg': res})
@@ -47,25 +131,6 @@ def logoutView(request):
     """退出登录"""
     logout(request) #这个方法会将存储在用户session数据全部清空
     return render(request,'login.html',{'msg': ""})
-
-# 添加访问权限设置
-@login_required
-def select_all(request):
-    """查询User全表信息，获取user、pwd、email信息"""
-    users = ""
-    pwds = ""
-    mails = ""
-    # 查询全表信息
-    res = User.objects.all()  # 迭代对象queryset
-
-    for i in res:
-        users += " " + i.username
-        pwds += " " + i.password
-        mails += " " + i.email
-
-    return HttpResponse("""<p>查询user结果：%s</p>
-                        <p>查询password结果：%s</p>
-                        <p>查询email结果：%s</p>""" % (users, pwds, mails))
 
 
 def register(request):
@@ -128,6 +193,25 @@ def login_demo(request):
             return render(request, 'login.html', {'msg': '账号密码错误'})
     else:
         return render(request, "login.html", {'msg': ''})
+
+# 添加访问权限设置
+# @login_required
+def select_all(request):
+    """查询User全表信息，获取user、pwd、email信息"""
+    users = ""
+    pwds = ""
+    mails = ""
+    # 查询全表信息
+    res = User.objects.all()  # 迭代对象queryset
+
+    for i in res:
+        users += " " + i.username
+        pwds += " " + i.password
+        mails += " " + i.email
+
+    return HttpResponse("""<p>查询user结果：%s</p>
+                        <p>查询password结果：%s</p>
+                        <p>查询email结果：%s</p>""" % (users, pwds, mails))
 
 
 def post_del(request):

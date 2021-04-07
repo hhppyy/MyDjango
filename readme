@@ -66,5 +66,13 @@
     设置文件上传数据表、adminx注册表
     设置文件上传目录/media/
     配url，回显图片
+2021-04-07 第二十六次提交：序列化
+    stendent_api1 序列化
+    stendent_api2 serializers转json--不推荐
+    stendent_api3 model_to_dict()转字典
+    stendent_api4 values()转字典
+    model_to_dict()方法会跳过DateTimeFiled，目前解决方法手动插入
+
+
 
 
