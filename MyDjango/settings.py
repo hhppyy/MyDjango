@@ -102,11 +102,11 @@ django.db.backends.oracle 连接 oracle
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 或者使用 mysql.connector.django
-        'NAME': 'xx',
-        'USER': 'xx',
-        'PASSWORD': 'xxx',
-        'HOST': 'xxxx',
-        'PORT': 'xx',
+        'NAME': 'my_django1',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': '123.56.231.107',
+        'PORT': '3309',
     }
 }
 
@@ -167,5 +167,7 @@ SESSION_SAVE_EVERY_REQUEST = True          #是否每次请求都保存session�
 # SESSION_EXPIRE_AT_BROWSER_CLOSE = True 和
 # SESSION_SAVE_EVERY_REQUEST = True 需同时设置否则会导致过期时间无法生效
 
+# 配置上传文件的目录地址
+MEDIA_URL = '/media/'
 
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

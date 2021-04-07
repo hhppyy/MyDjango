@@ -10,6 +10,12 @@ from . import models
 之前inlines 关联的表（class MoreInfo）继承admin.StackedInline， 这里继承object
 之前可以有2种注册方式，可以用装饰器方法@admin.register（表类名），这里只能通过xadmin.site.register(表类名, xxx)方式
 """
+#注册文件和图片表
+
+class ContorlFiles(object):
+    list_dispaly = ['title','add_time']
+
+xadmin.site.register(models.FileImages,ContorlFiles)
 
 #注册表关联
 

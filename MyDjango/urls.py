@@ -15,7 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-
+from django.views.static import serve
+from . import settings
 from django.conf.urls import url
 from MyApp import views
 import xadmin
@@ -35,6 +36,8 @@ urlpatterns = [
     url(r'^accounts/login/$', views.login_demo, name="login"),
     url(r'^register/$', views.register),
     url(r'^update_pwd/$', views.update_pwd),
+    # urls.py配置图片的URL地址访问，要不然查询详情的时候缩略图无法正常显示
+    url(r'^media/(?P<path>.*)$', serve, {"document_root": settings.MEDIA_ROOT}),
     # path('yuyu/archive/<year>/<month>.html', views.archive),
     url(r'^yuyu/archive/(?P<year>[0-9]{4})/(?P<month>[0-9]{2}).html$', views.archive),
     url(r'^lianjie$', views.lianjie),

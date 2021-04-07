@@ -62,5 +62,9 @@
     redirect重定向
     新增update_pwd.html修改密码
     添加/accounts/login/页面地址，指向登录页面
+2021-04-07 第二十五次提交：multipart/form-data文件上传
+    设置文件上传数据表、adminx注册表
+    设置文件上传目录/media/
+    配url，回显图片
 
 
