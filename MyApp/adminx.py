@@ -11,15 +11,33 @@ from . import models
 之前可以有2种注册方式，可以用装饰器方法@admin.register（表类名），这里只能通过xadmin.site.register(表类名, xxx)方式
 """
 
-#注册表 一对多
+
+# 注册表，多对多
+class ControlAuther(object):
+    list_display = ['name', 'mail', 'city']
+
+
+class ControlBook(object):
+    list_display = ['book_name', '作者']
+
+    # 定义一个方法，遍历book的auther，然后用list返回
+    def 作者(self, obj):
+        return [a.name for a in obj.auth.all()]
+
+xadmin.site.register(models.Auther,ControlAuther)
+xadmin.site.register(models.Book,ControlBook)
+
+# 注册表 一对多
 class ContorlBank(object):
-    list_display = ['bank_name','city','point']
+    list_display = ['bank_name', 'city', 'point']
+
 
 class ContorlCardInfo(object):
-    list_display = ['card_id','card_user','info']
+    list_display = ['card_id', 'card_user', 'info']
+
 
 xadmin.site.register(models.Bank, ContorlBank)
-xadmin.site.register(models.CardInfo,ContorlCardInfo)
+xadmin.site.register(models.CardInfo, ContorlCardInfo)
 
 
 # 注册文件和图片表

@@ -74,6 +74,7 @@
     model_to_dict()方法会跳过DateTimeFiled，目前解决方法手动插入
 2021-04-07 第二十七次提交：后台管理一对多操作ForeignKey
     更新数据update方法
+2021-04-07 第二十八次提交：后台管理多对多操作ManyToManyField
 
 
 

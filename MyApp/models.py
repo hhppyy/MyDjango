@@ -9,6 +9,33 @@ DatabaseFeatures.supports_microsecond_precision = False  # 关键设置
 
 # Create your models here.
 
+# 表关联，多对多
+class Auther(models.Model):
+    """作者"""
+    name = models.CharField(max_length=30, verbose_name='姓名')
+    mail = models.CharField(max_length=30, verbose_name='邮箱')
+    city = models.CharField(max_length=30, verbose_name='城市')
+
+    class Meta:
+        verbose_name_plural = "作者"
+
+    def __str__(self):
+        return self.name
+
+
+class Book(models.Model):
+    """书籍详情"""
+    book_name = models.CharField(max_length=30, verbose_name='书名')
+    auth = models.ManyToManyField(Auther, verbose_name='作者')
+
+    class Meta:
+        verbose_name_plural = "书籍详情"
+
+    def __str__(self):
+        return self.book_name
+
+
+
 # 表关联，一对多设计
 class Bank(models.Model):
     """银行信息"""
