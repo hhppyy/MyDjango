@@ -11,6 +11,12 @@ from . import models
 之前可以有2种注册方式，可以用装饰器方法@admin.register（表类名），这里只能通过xadmin.site.register(表类名, xxx)方式
 """
 
+class ControlActicl(object):
+    list_display = ['title','body','auth']
+xadmin.site.register(models.ArticleDetail,ControlActicl)
+
+
+
 
 # 注册表，多对多
 class ControlAuther(object):
