@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'crispy_forms',                  # 新添加配置xadmin
 ]
 
+#中间件
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

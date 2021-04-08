@@ -24,18 +24,19 @@ def stendent_api4(request):
         infos = []
         # values()不带参数默认输出全部字段
         all = Stendent.objects.all().values()
-        #如果值输出name、qq
+        # 如果值输出name、qq
         # all = Stendent.objects.all().values('name','qq')
         res = {
             "code": 0,
             "msg": "success!",
             "data": {
-                "info": list(all), #序列化输出
+                "info": list(all),  # 序列化输出
                 "total": len(infos)
             }
         }
 
-        return JsonResponse(res,json_dumps_params={'ensure_ascii': False})
+        return JsonResponse(res, json_dumps_params={'ensure_ascii': False})
+
 
 def stendent_api3(request):
     if request.method == "GET":
@@ -43,9 +44,9 @@ def stendent_api3(request):
         all = Stendent.objects.all()
         for i in all:
             j = 0
-            #model_to_dict 会跳过DateTimeFiled，手动添加
+            # model_to_dict 会跳过DateTimeFiled，手动添加
             infos.append(model_to_dict(i))
-            #手动添加时间
+            # 手动添加时间
             infos[j]['createtime'] = i.creattime
             infos[j]['updatetime'] = i.updatetime
             j += 1
@@ -58,20 +59,22 @@ def stendent_api3(request):
             }
         }
 
-        return JsonResponse(res,json_dumps_params={'ensure_ascii': False})
+        return JsonResponse(res, json_dumps_params={'ensure_ascii': False})
+
 
 def stendent_api2(request):
     if request.method == "GET":
         datas = {}
         all = Stendent.objects.all()
-        datas['infos'] = json.loads(serializers.serialize('json',all))
+        datas['infos'] = json.loads(serializers.serialize('json', all))
         datas['total'] = len(all)
         res = {
             "code": 0,
             "msg": "success!",
             "data": datas
         }
-        return JsonResponse(res,json_dumps_params={'ensure_ascii': False})
+        return JsonResponse(res, json_dumps_params={'ensure_ascii': False})
+
 
 def stendent_api1(request):
     """查询用户信息"""
@@ -93,44 +96,46 @@ def stendent_api1(request):
         res = {
             "code": 0,
             "msg": "sussess!",
-            "data": {"infos": infos, # 序列化输出
+            "data": {"infos": infos,  # 序列化输出
                      "totals": len(infos)
                      }
         }
         return JsonResponse(res, json_dumps_params={'ensure_ascii': False})
+
 
 @login_required
 def update_pwd(request):
     """修改密码"""
     res = ""
     if request.method == "GET":
-        return render(request,'update_pwd.html',{'msg': res})
+        return render(request, 'update_pwd.html', {'msg': res})
     elif request.method == "POST":
-        pwd = request.POST.get('password','')
-        new_pwd = request.POST.get('new','')
+        pwd = request.POST.get('password', '')
+        new_pwd = request.POST.get('new', '')
 
-        #获取登录的用户名
+        # 获取登录的用户名
         username = request.user.username
-        print('当前登录的用户名为：%s' %username)
+        print('当前登录的用户名为：%s' % username)
 
-        #校验密码对不对
-        user = authenticate(username=username,password=pwd)
+        # 校验密码对不对
+        user = authenticate(username=username, password=pwd)
         if not user:
-            return render(request,'update_pwd.html',{'msg': '原密码输入错误，请重新输入'})
+            return render(request, 'update_pwd.html', {'msg': '原密码输入错误，请重新输入'})
         elif new_pwd == pwd:
-            return render(request,'update_pwd.html',{'msg': '新密码与旧密码一致，请重新输入'})
+            return render(request, 'update_pwd.html', {'msg': '新密码与旧密码一致，请重新输入'})
         else:
-            #修改密码
+            # 修改密码
             user.set_password(new_pwd)
             user.save()
             # return render(request,'update_pwd.html',{'msg': '修改密码成功'})
             # 修改成功后跳转至登录页面
             return HttpResponseRedirect('/login/')
 
+
 def logoutView(request):
     """退出登录"""
-    logout(request) #这个方法会将存储在用户session数据全部清空
-    return render(request,'login.html',{'msg': ""})
+    logout(request)  # 这个方法会将存储在用户session数据全部清空
+    return render(request, 'login.html', {'msg': ""})
 
 
 def register(request):
@@ -180,7 +185,7 @@ def login_demo(request):
                 # return HttpResponseRedirect('/update_pwd/')
                 # return render(request, 'login.html', {'msg': '登录成功'})
 
-                #添加cookie
+                # 添加cookie
                 response = redirect("/update_pwd/")
                 # response.set_cookie('user',username)
                 response.set_signed_cookie('user', username, salt="salt")
@@ -193,6 +198,7 @@ def login_demo(request):
             return render(request, 'login.html', {'msg': '账号密码错误'})
     else:
         return render(request, "login.html", {'msg': ''})
+
 
 # 添加访问权限设置
 # @login_required

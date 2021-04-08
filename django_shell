@@ -82,15 +82,20 @@ from MyApp.models import PersonUser
 info=PersonUser.objects.create(uid=2,name='test1')
 #保存
 info.save()
+# 方法一 更新单条数据
 a=PersonUser.objects.get(uid=2)
-a.name
+
 #更新a.name的值
 a.name='test2'
 a.save()
 #再次查询，已经修改成新值
 a.name
 
-
+# 方法二
+#更新多条数据
+PersonUser.objects.filter(name='test').update(age='22')
+#全表更新
+PersonUser.objects.update(age='22')
 
 
 
