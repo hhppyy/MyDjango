@@ -1,5 +1,14 @@
 import xadmin
 from . import models
+from xadmin.layout import Main
+from xadmin.layout import Tab
+from xadmin.layout import TabHolder
+from xadmin.layout import Fieldset
+from xadmin.layout import Row
+from xadmin.layout import Col
+from xadmin.layout import AppendedText
+from xadmin.layout import Side
+from xadmin.layout import Field
 
 """
 在admin.py文件的同一目录新建一个adminx.py(注意只能是adminx.py,不能叫其它的名称)
@@ -13,6 +22,28 @@ from . import models
 
 class ControlActicl(object):
     list_display = ['title','body','auth']
+
+
+    # readonly_fields = ['detail'] #设置只读字段
+
+    exclude = ['auth'] # 不显示某个字段
+    #传入元组
+    form_layout = (
+        Fieldset(('基本信息'),
+                 Row('title','auth'), #Row表示将里面的字段显示为一行
+                 Row('classify'),
+                 css_class= 'unsort',#不让区块移动
+                 ),
+        Fieldset(('正文内容'),# Fieldset第一个参数表示区块名称
+                 'body',
+                 css_class='unsort',
+                 ),
+        Fieldset(('备注'),
+                 Row('detail'),
+                 css_class='unsort no_title', #no_title是不显示区块的名称
+                 ),
+    )
+
 xadmin.site.register(models.ArticleDetail,ControlActicl)
 
 

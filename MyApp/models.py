@@ -25,7 +25,11 @@ class ArticleDetail(models.Model):
                                  on_delete=models.CASCADE,
                                  verbose_name='文章分类',)
     body = models.TextField(verbose_name='正文',default='请输入正文')
-    auth = models.CharField(max_length=30,verbose_name='作者',default='admin')
+    auth = models.CharField(max_length=30,
+                            verbose_name='作者',
+                            default='admin',
+                            blank=True,
+                            null=True)
     detail = models.TextField(verbose_name='备注',default='请添加备注')
     create_time = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
     update_time = models.DateTimeField(auto_now=True,verbose_name='更新时间')
