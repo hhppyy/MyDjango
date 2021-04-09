@@ -20,33 +20,39 @@ from xadmin.layout import Field
 之前可以有2种注册方式，可以用装饰器方法@admin.register（表类名），这里只能通过xadmin.site.register(表类名, xxx)方式
 """
 
-class ControlActicl(object):
-    list_display = ['title','body','auth']
 
+class ControlStudentUser(object):
+    list_display = ['student_id', 'name', 'gender', 'age']
+
+
+xadmin.site.register(models.StudentUser, ControlStudentUser)
+
+
+class ControlActicl(object):
+    list_display = ['title', 'body', 'auth']
 
     # readonly_fields = ['detail'] #设置只读字段
 
-    exclude = ['auth'] # 不显示某个字段
-    #传入元组
+    exclude = ['auth']  # 不显示某个字段
+    # 传入元组
     form_layout = (
         Fieldset(('基本信息'),
-                 Row('title','auth'), #Row表示将里面的字段显示为一行
+                 Row('title', 'auth'),  # Row表示将里面的字段显示为一行
                  Row('classify'),
-                 css_class= 'unsort',#不让区块移动
+                 css_class='unsort',  # 不让区块移动
                  ),
-        Fieldset(('正文内容'),# Fieldset第一个参数表示区块名称
+        Fieldset(('正文内容'),  # Fieldset第一个参数表示区块名称
                  'body',
                  css_class='unsort',
                  ),
         Fieldset(('备注'),
                  Row('detail'),
-                 css_class='unsort no_title', #no_title是不显示区块的名称
+                 css_class='unsort no_title',  # no_title是不显示区块的名称
                  ),
     )
 
-xadmin.site.register(models.ArticleDetail,ControlActicl)
 
-
+xadmin.site.register(models.ArticleDetail, ControlActicl)
 
 
 # 注册表，多对多
@@ -61,8 +67,10 @@ class ControlBook(object):
     def 作者(self, obj):
         return [a.name for a in obj.auth.all()]
 
-xadmin.site.register(models.Auther,ControlAuther)
-xadmin.site.register(models.Book,ControlBook)
+
+xadmin.site.register(models.Auther, ControlAuther)
+xadmin.site.register(models.Book, ControlBook)
+
 
 # 注册表 一对多
 class ContorlBank(object):

@@ -9,30 +9,54 @@ DatabaseFeatures.supports_microsecond_precision = False  # 关键设置
 
 # Create your models here.
 
+class StudentUser(models.Model):
+    """学生表"""
+    student_id = models.CharField(max_length=30, verbose_name='学号', default='')
+    name = models.CharField(max_length=30, verbose_name='姓名', default='')
+    gender_choices = (
+        ('M', '男'),
+        ('F', '女'),
+    )
+    gender = models.CharField(max_length=10,
+                              choices=gender_choices,
+                              verbose_name='性别',
+                              default='')
+    age = models.IntegerField(verbose_name='年龄', default='')
+
+    class Meta:
+        verbose_name = '学生'
+        verbose_name_plural = verbose_name
+
+    def __str__(self):
+        return self.name
+
+
 class ArticleClassify(models.Model):
     """文章分类"""
-    n = models.CharField(max_length=30,verbose_name='分类',default='')
+    n = models.CharField(max_length=30, verbose_name='分类', default='')
+
     def __str__(self):
         return self.__doc__ + "->" + self.n
 
     class Meta:
         verbose_name_plural = "文章分类"
 
+
 class ArticleDetail(models.Model):
     """文章"""
-    title = models.CharField(max_length=30,verbose_name='标题',default='请输入标题')
+    title = models.CharField(max_length=30, verbose_name='标题', default='请输入标题')
     classify = models.ForeignKey(ArticleClassify,
                                  on_delete=models.CASCADE,
-                                 verbose_name='文章分类',)
-    body = models.TextField(verbose_name='正文',default='请输入正文')
+                                 verbose_name='文章分类', )
+    body = models.TextField(verbose_name='正文', default='请输入正文')
     auth = models.CharField(max_length=30,
                             verbose_name='作者',
                             default='admin',
                             blank=True,
                             null=True)
-    detail = models.TextField(verbose_name='备注',default='请添加备注')
-    create_time = models.DateTimeField(auto_now_add=True,verbose_name='创建时间')
-    update_time = models.DateTimeField(auto_now=True,verbose_name='更新时间')
+    detail = models.TextField(verbose_name='备注', default='请添加备注')
+    create_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
+    update_time = models.DateTimeField(auto_now=True, verbose_name='更新时间')
 
     def __str__(self):
         return self.__doc__ + "title->" + self.title
@@ -40,10 +64,6 @@ class ArticleDetail(models.Model):
     class Meta:
         verbose_name_plural = "文章列表"
         verbose_name = "文章列表"
-
-
-
-
 
 
 # 表关联，多对多
@@ -70,7 +90,6 @@ class Book(models.Model):
 
     def __str__(self):
         return self.book_name
-
 
 
 # 表关联，一对多设计
