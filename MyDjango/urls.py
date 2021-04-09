@@ -20,16 +20,23 @@ from . import settings
 from django.conf.urls import url
 from MyApp import views
 import xadmin
+from rest_framework import routers
+from django.conf.urls import include
 
 """
 path:匹配绝对路径
 url:支持正则，django2.x版本推荐
 re_path:支持正则，django1.x版本推荐
 """
+router = routers.DefaultRouter()
+router.register(r'cards',views.CardViewSet)
+
+
 
 urlpatterns = [
     path('xadmin/', xadmin.site.urls),  # xadmin
     path('admin/', admin.site.urls),  # admin
+    url(r'^',include(router.urls)),#restful API
     url(r'^hello$', views.hello),
     # url 设置名称，方便在其他地方引用
     url(r'^login/$', views.login_demo, name="login"),

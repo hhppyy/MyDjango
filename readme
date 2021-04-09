@@ -87,5 +87,9 @@
     设置只读    readonly_fields = ['detail']
     隐藏标题    css_class='no_title'
 2021-04-09 第三十一次提交：模型(model)中choices使用
-
+2021-04-09 第三十二次提交：restful API
+    models、views、setting、url
+    安装模块
+        pip install djangorestframework
+        pip install django-filter
 

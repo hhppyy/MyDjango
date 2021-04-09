@@ -9,6 +9,20 @@ DatabaseFeatures.supports_microsecond_precision = False  # 关键设置
 
 # Create your models here.
 
+class RestCard(models.Model):
+    """Restful card"""
+    card_id = models.CharField(max_length=30, verbose_name='卡号', default='')
+    card_user = models.CharField(max_length=30, verbose_name='姓名', default='')
+    add_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
+
+    class Meta:
+        verbose_name_plural = '银行账户信息'
+        verbose_name = '银行卡账户——基本信息'
+
+    def __str__(self):
+        return self.card_id
+
+
 class StudentUser(models.Model):
     """学生表"""
     student_id = models.CharField(max_length=30, verbose_name='学号', default='')

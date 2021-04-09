@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'MyApp',                         #应用APP
     'xadmin',                        # 新添加配置xadmin
     'crispy_forms',                  # 新添加配置xadmin
+    'rest_framework',                #restful API
 ]
 
 #中间件

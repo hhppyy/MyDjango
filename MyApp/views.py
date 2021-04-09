@@ -13,11 +13,54 @@ from django.contrib.auth.hashers import check_password
 from .models import Stendent
 from django.contrib.auth.models import User
 import json
-from django.core import serializers
+# from django.core import serializers
 from django.forms.models import model_to_dict
 
+from rest_framework import viewsets
+from rest_framework import serializers
+from .models import *
+from django.http import QueryDict
+from rest_framework.request import Request
 
 # Create your views here.
+
+def get_parameter_dic(requst,*args,**kwargs):
+    if isinstance(requst,Request) == False:
+        return {}
+
+    query_params = requst.query_params
+    if isinstance(query_params,QueryDict):
+        query_params = query_params.dict()
+    result_data = requst.data
+    if isinstance(result_data,QueryDict):
+        result_data = result_data.dict()
+
+    if query_params != {}:
+        return query_params
+    else:
+        return result_data
+
+class CardSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = RestCard
+        fields = "__all__"
+
+class CardViewSet(viewsets.ModelViewSet):
+    queryset = RestCard.objects.all()
+    serializer_class = CardSerializer
+
+    def get(self,request,*args,**kwargs):
+        params = get_parameter_dic(request)
+        return JsonResponse(data=params)
+
+    def post(self,request,*args,**kwargs):
+        params = get_parameter_dic(request)
+        return JsonResponse(data=params)
+
+    def put(self,requset,*args,**kwargs):
+        params = get_parameter_dic(requset)
+        return JsonResponse(data=params)
+
 
 def stendent_api4(request):
     if request.method == "GET":
