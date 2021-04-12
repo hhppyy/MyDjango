@@ -191,9 +191,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_SSL = True                   # SSL加密方式
 EMAIL_HOST = 'smtp.qq.com'             # 发送邮件的邮箱 的 SMTP服务器，这里用了163邮箱
 EMAIL_PORT = 465                       # SMTP服务器端口
-EMAIL_HOST_USER = '741841851@qq.com'   # 发件人
-EMAIL_HOST_PASSWORD = 'krmhxqxlhuumbbgd'   # 密码(这里使用的是授权码)
-EMAIL_FROM = '741841851<741841851@qq.com>'  # 邮件显示的发件人
+EMAIL_HOST_USER = 'xxx@qq.com'   # 发件人
+EMAIL_HOST_PASSWORD = 'xxxx'   # 密码(这里使用的是授权码)
+EMAIL_FROM = 'xxxx<xxxx@qq.com>'  # 邮件显示的发件人
 
 # 如果是其它的企业邮箱，直接密码登录的话，使用TLS方式
 # EMAIL_USE_SSL 和 EMAIL_USE_TLS 是互斥的，只能有一个为 True。
