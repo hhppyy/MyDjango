@@ -10,7 +10,6 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.hashers import check_password
-from .models import Stendent
 from django.contrib.auth.models import User
 import json
 # from django.core import serializers
@@ -21,18 +20,155 @@ from rest_framework import serializers
 from .models import *
 from django.http import QueryDict
 from rest_framework.request import Request
+from django.core.mail import send_mail
+from django.core.mail import send_mass_mail
+from django.core.mail import EmailMessage
+import os
+from django.core.mail import EmailMultiAlternatives
 
 # Create your views here.
 
-def get_parameter_dic(requst,*args,**kwargs):
-    if isinstance(requst,Request) == False:
+def mialfile(request):
+    """发送待html正文和附件"""
+    email = EmailMultiAlternatives(subject='标题',  #
+                         body='正文',  # 正文
+                         from_email='741841851@qq.com',  # 发件人
+                         to=['741841851@qq.com'],  # 收件人--list或元组
+                         cc=['741841851@qq.com'],  # 抄送
+                         headers={'Message-ID': 'foo'},
+                         reply_to=['741841851@qq.com']  # 回复”标题中使用的收件人地址列表或元组
+                         )
+    cur = os.path.dirname(os.path.realpath(__file__))
+    file1 = os.path.join(cur, 'static', 'git_1.png')
+
+    # 方法1
+    email.attach_file(file1, mimetype=None)
+
+    # 方法2
+    file2 = os.path.join(cur, 'static', 'octocat-logo.png')
+    with open(file2, 'rb') as f:
+        email.attach('octocat-logo.png', f.read(), 'image/png')
+
+    h = '''
+        <!DOCTYPE HTML>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>带图片的邮件</title>
+        </head>
+        <body>
+        <a href="https://yuedu.baidu.com/ebook/902224ab27fff705cc1755270722192e4536582b" target="_blank">
+            <p>pytest教程,点图片进入：<br>
+            <img src="https://img2018.cnblogs.com/blog/1070438/201902/1070438-20190228112918941-704279799.png" height="160" width="270" />
+            </p></a>
+        <p>
+        其它图片：<br>
+        <img src="http://www.w3school.com.cn/i/eg_chinarose.jpg" height=150 width=300/></p>
+        <p>请注意，插入动画图像的语法与插入普通图像的语法没有区别。</p>
+        </body>
+        </html>
+        '''
+    email.attach_alternative(content=h,mimetype='text/html')
+    email.send()  # 会发送一个邮件2个附件
+    return HttpResponse('附件发送成功')
+
+
+def file_mail(request):
+    """发送附件"""
+    email = EmailMessage(subject='标题',  #
+                         body='正文',  # 正文
+                         from_email='741841851@qq.com',  # 发件人
+                         to=['741841851@qq.com'],  # 收件人--list或元组
+                         cc=['741841851@qq.com'],  # 抄送
+                         headers={'Message-ID': 'foo'},
+                         reply_to=['741841851@qq.com']  # 回复”标题中使用的收件人地址列表或元组
+                         )
+
+    cur = os.path.dirname(os.path.realpath(__file__))
+    file1 = os.path.join(cur, 'static', 'git_1.png')
+
+    #方法1
+    email.attach_file(file1, mimetype=None)
+
+    #方法2
+    file2 = os.path.join(cur, 'static', 'octocat-logo.png')
+    with open(file2,'rb') as f:
+        email.attach('octocat-logo.png',f.read(),'image/png')
+
+    email.send()#会发送一个邮件2个附件
+    return HttpResponse('附件发送成功')
+
+
+def mail_html(request):
+    """发送html格式邮件"""
+    html_message = """
+    <!DOCTYPE HTML>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>带图片的邮件</title>
+    </head>
+    <body>
+    <a href="https://yuedu.baidu.com/ebook/902224ab27fff705cc1755270722192e4536582b" target="_blank">
+        <p>pytest教程,点图片进入：<br>
+        <img src="https://img2018.cnblogs.com/blog/1070438/201902/1070438-20190228112918941-704279799.png" height="160" width="270" />
+        </p></a>
+    <p>
+    其它图片：<br>
+    <img src="http://www.w3school.com.cn/i/eg_chinarose.jpg" height=150 width=300/></p>
+    <p>请注意，插入动画图像的语法与插入普通图像的语法没有区别。</p>
+    </body>
+    </html>
+    """
+    send_mail(subject='html格式',  # 标题
+              message='html正文',  # 正文
+              from_email='741841851@qq.com',  # 发件人
+              recipient_list=['741841851@qq.com'],  # 收件人--list
+              fail_silently=False,
+              html_message=html_message)  # 发送html格式
+    return HttpResponse('html邮件发送成功！')
+
+
+def mails(request):
+    """发送邮件--多个"""
+    message1 = ('test1标题',
+                'test1正文',
+                '741841851@qq.com',
+                ['741841851@qq.com'])
+    message2 = ('test2标题',
+                'test2正文',
+                '741841851@qq.com',
+                ['741841851@qq.com'])
+    send_mass_mail((message1, message2), fail_silently=False)
+    return HttpResponse('所有邮件发送成功')
+
+
+def mail(request):
+    """发送邮件--单个"""
+    send_mail(subject='test标题',  # 标题
+              message='test邮件',  # 正文
+              from_email='741841851@qq.com',  # 发件人
+              recipient_list=['741841851@qq.com'],  # 收件人--list
+              fail_silently=False)
+    return HttpResponse('邮件发送成功！')
+
+
+def get_parameter_dic(paramser, *args, **kwargs):
+    """
+    isinstance() 函数来判断一个对象是否是一个已知的类型，类似 type()。
+    isinstance() 与 type() 区别：
+    type() 不会认为子类是一种父类类型，不考虑继承关系。
+    isinstance() 会认为子类是一种父类类型，考虑继承关系。
+    如果要判断两个类型是否相同推荐使用 isinstance()。
+    """
+    if isinstance(paramser, Request) == False:
         return {}
 
-    query_params = requst.query_params
-    if isinstance(query_params,QueryDict):
+    query_params = paramser.query_params
+    if isinstance(query_params, QueryDict):
         query_params = query_params.dict()
-    result_data = requst.data
-    if isinstance(result_data,QueryDict):
+    result_data = paramser.data
+    if isinstance(result_data, QueryDict):
         result_data = result_data.dict()
 
     if query_params != {}:
@@ -40,24 +176,26 @@ def get_parameter_dic(requst,*args,**kwargs):
     else:
         return result_data
 
+
 class CardSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = RestCard
         fields = "__all__"
 
+
 class CardViewSet(viewsets.ModelViewSet):
     queryset = RestCard.objects.all()
     serializer_class = CardSerializer
 
-    def get(self,request,*args,**kwargs):
+    def get(self, request, *args, **kwargs):
         params = get_parameter_dic(request)
         return JsonResponse(data=params)
 
-    def post(self,request,*args,**kwargs):
+    def post(self, request, *args, **kwargs):
         params = get_parameter_dic(request)
         return JsonResponse(data=params)
 
-    def put(self,requset,*args,**kwargs):
+    def put(self, requset, *args, **kwargs):
         params = get_parameter_dic(requset)
         return JsonResponse(data=params)
 
@@ -625,3 +763,4 @@ def hello(request):
 
 # def hello(request):
 #     return HttpResponse("hello,world!")
+

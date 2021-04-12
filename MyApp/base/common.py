@@ -11,5 +11,10 @@ def validateEmail(email):
     else:
         return False
 if __name__ == '__main__':
-    email = '123@qq.com'
-    a = validateEmail(email)
+    # email = '123@qq.com'
+    # a = validateEmail(email)
+    import os
+    cur = os.path.dirname(os.path.realpath(__file__))
+    print(cur)
+    file_path = os.path.join(cur, 'MyApp\static', 'git_1.png')
+    print(file_path)

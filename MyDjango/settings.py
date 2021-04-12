@@ -29,7 +29,7 @@ SECRET_KEY = '+@(c5k=wieekr+po(vw@5)&&!q=(vvptw^k%6y*g4+his-+6j-'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 
-#由于处于开发阶段，DEBUG 默认为True，当开发完成正式发布产品上线时，需要将DEBUG = False
+# 由于处于开发阶段，DEBUG 默认为True，当开发完成正式发布产品上线时，需要将DEBUG = False
 # ALLOWED_HOSTS是域名访问权限，设置可以访问的域名，默认值为空[], 只允许localhost或127.0.0.1在浏览器上访问。
 # DEBUG 改成False之后，需要重新启动服务，同时需要加个ALLOWED_HOSTS 地址，如果想让所以的域名都能访问，可以设置为：ALLOWED_HOSTS = ["*"]
 
@@ -182,3 +182,33 @@ SESSION_SAVE_EVERY_REQUEST = True          #是否每次请求都保存session�
 MEDIA_URL = '/media/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+# 配置邮箱
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_USE_SSL = True                   # SSL加密方式
+EMAIL_HOST = 'smtp.qq.com'             # 发送邮件的邮箱 的 SMTP服务器，这里用了163邮箱
+EMAIL_PORT = 465                       # SMTP服务器端口
+EMAIL_HOST_USER = '741841851@qq.com'   # 发件人
+EMAIL_HOST_PASSWORD = 'krmhxqxlhuumbbgd'   # 密码(这里使用的是授权码)
+EMAIL_FROM = '741841851<741841851@qq.com>'  # 邮件显示的发件人
+
+# 如果是其它的企业邮箱，直接密码登录的话，使用TLS方式
+# EMAIL_USE_SSL 和 EMAIL_USE_TLS 是互斥的，只能有一个为 True。
+
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.xx.com'  # 如果是其它企业邮箱
+# EMAIL_PORT = 25
+# EMAIL_HOST_USER = 'xxx@xx.com' # 帐号
+# EMAIL_HOST_PASSWORD = '**********'  # 密码
+# EMAIL_FROM = '741841851<xx@xx.com>'   # 邮件显示的发件人
+
+
+
+
+
+
+
+

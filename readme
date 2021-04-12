@@ -93,3 +93,10 @@
         pip install djangorestframework
         pip install django-filter
 
+2021-04-12 第三十三次提交：发送邮件
+    发送单个邮件
+    发送多个邮件
+    发送html邮件
+    发送附件
+    发送html和附件邮件
+    setting.py配置邮箱

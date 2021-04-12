@@ -28,6 +28,7 @@ path:匹配绝对路径
 url:支持正则，django2.x版本推荐
 re_path:支持正则，django1.x版本推荐
 """
+# restful API
 router = routers.DefaultRouter()
 router.register(r'cards',views.CardViewSet)
 
@@ -67,4 +68,9 @@ urlpatterns = [
     url(r'^stendent_api2/$', views.stendent_api2),
     url(r'^stendent_api3/$', views.stendent_api3),
     url(r'^stendent_api4/$', views.stendent_api4),
+    url(r'^mail/$', views.mail),
+    url(r'^mails/$', views.mails),
+    url(r'^mail_html/$', views.mail_html),
+    url(r'^file_mail/$', views.file_mail),
+    url(r'^mialfile/$', views.mialfile),
 ]
