@@ -1,5 +1,6 @@
 import xadmin
 from . import models
+from xadmin import views
 from xadmin.layout import Main
 from xadmin.layout import Tab
 from xadmin.layout import TabHolder
@@ -21,6 +22,46 @@ from xadmin.layout import Field
 """
 
 
+# 全局设置，最好放在最上方
+class GlobalSetting(object):
+    site_title = 'xxx平台'  # title内容
+    site_footer = 'xxx2'  # 底部@后面
+    menu_style = 'accordion'  # 菜单折叠
+
+    # 自定义菜单
+    def get_site_menu(self):
+        return [
+            {
+                'title': '自定义菜单',
+                'icon': 'fa fa-bars',
+                'menus': (
+                    {
+                        'title': '学生',
+                        'icon': 'fa fa-bug',
+                        'url': self.get_model_url(models.StudentUser, 'changelist')
+                    },
+                    {
+                        'title': 'a发邮件',
+                        'icon': 'fa fa-envelope-o',
+                        'url': self.get_model_url(models.Student, 'changelist'),
+                    }
+                )
+            }
+        ]
+
+
+xadmin.site.register(views.CommAdminView, GlobalSetting)
+
+
+class ThemeSetting(object):
+    """主题设置"""
+    enable_themes = True  # 使用主题
+    use_bootswatch = True  # bootswatch是一款基于bootstrap的汇集了多种风格的前端UI解决方案
+
+
+xadmin.site.register(views.BaseAdminView, ThemeSetting)
+
+
 class ControlStudentUser(object):
     list_display = ['student_id', 'name', 'gender', 'age']
 
@@ -33,7 +74,7 @@ class ControlActicl(object):
 
     # readonly_fields = ['detail'] #设置只读字段
 
-    exclude = ['auth']  # 不显示某个字段
+    # exclude = ['auth']  # 不显示某个字段
     # 传入元组
     form_layout = (
         Fieldset(('基本信息'),
@@ -49,6 +90,17 @@ class ControlActicl(object):
                  Row('detail'),
                  css_class='unsort no_title',  # no_title是不显示区块的名称
                  ),
+        TabHolder(
+            Tab('body-row',
+                Field('title', css_class='extra'),
+                Field('body'),
+                css_class='unsort'
+                ),
+            Tab('body-json',
+                Field('body', ),
+                ),
+            css_class='unsort',
+        )
     )
 
 
