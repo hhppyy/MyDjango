@@ -73,4 +73,5 @@ urlpatterns = [
     url(r'^mail_html/$', views.mail_html),
     url(r'^file_mail/$', views.file_mail),
     url(r'^mialfile/$', views.mialfile),
+    url(r'^api/v1/login/$', views.LoginViewSet.as_view()),#token登录
 ]

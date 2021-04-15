@@ -55,7 +55,25 @@ INSTALLED_APPS = [
     'xadmin',                        # 新添加配置xadmin
     'crispy_forms',                  # 新添加配置xadmin
     'rest_framework',                #restful API
+    'rest_framework.authtoken',      #token认证
 ]
+
+REST_FRAMEWORK = {
+    # 权限认证
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',           # IsAuthenticated 仅通过认证的用户
+        'rest_framework.permissions.AllowAny',                  # AllowAny 允许所有用户
+        'rest_framework.permissions.IsAdminUser',               # IsAdminUser 仅管理员用户
+        'rest_framework.permissions.IsAuthenticatedOrReadOnly', # IsAuthenticatedOrReadOnly 认证的用户可以完全操作，否则只能get读取
+    ),
+    # 身份认证
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',    # token认证
+    )
+}
+
 
 #中间件
 MIDDLEWARE = [
@@ -113,11 +131,11 @@ django.db.backends.oracle 连接 oracle
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',  # 或者使用 mysql.connector.django
-        'NAME': 'xx',
-        'USER': 'xx',
-        'PASSWORD': 'xxx',
-        'HOST': 'xxxx',
-        'PORT': 'xx',
+        'NAME': 'my_django1',
+        'USER': 'root',
+        'PASSWORD': '123456',
+        'HOST': '123.56.231.107',
+        'PORT': '3309',
     }
 }
 

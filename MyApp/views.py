@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.http import JsonResponse
 from django.http import HttpResponseRedirect
 from .base.common import validateEmail
-from django.contrib.auth import authenticate
+
 from django.contrib.auth import login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required
@@ -26,7 +26,39 @@ from django.core.mail import EmailMessage
 import os
 from django.core.mail import EmailMultiAlternatives
 
+from rest_framework.authtoken.models import Token
+from django.contrib import auth
+# from django.contrib.auth import authenticate
+from rest_framework.views import APIView
+from rest_framework.permissions import IsAuthenticated,AllowAny
+from rest_framework.authentication import TokenAuthentication
+
+
 # Create your views here.
+
+class LoginViewSet(APIView):
+    """登录方法"""
+    permission_classes = (AllowAny,)  # AllowAny 允许所有用户
+
+    def post(self,request,*args,**kwargs):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        user = auth.authenticate(username=username,password=password)
+        # user = authenticate(username=username, password=password)
+        if not user:
+            return JsonResponse({'code': 0,
+                                 'msg': '用户名或密码错误！'}, json_dumps_params={'ensure_ascii': False})
+
+        #删除原有token
+        old_token = Token.objects.filter(user=user)
+        old_token.delete()
+        #创建新token
+        token = Token.objects.create(user=user)
+        return JsonResponse({'code': 0,
+                             'msg': '登录成功',
+                             'username': user.username,
+                             'token': token.key}, json_dumps_params={'ensure_ascii': False})
+
 
 def mialfile(request):
     """发送待html正文和附件"""
@@ -184,6 +216,9 @@ class CardSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class CardViewSet(viewsets.ModelViewSet):
+
+    authentication_classes = (TokenAuthentication,)   # token认证
+    permission_classes = (IsAuthenticated,)  # # IsAuthenticated 仅通过认证的用户
     queryset = RestCard.objects.all()
     serializer_class = CardSerializer
 
@@ -299,7 +334,7 @@ def update_pwd(request):
         print('当前登录的用户名为：%s' % username)
 
         # 校验密码对不对
-        user = authenticate(username=username, password=pwd)
+        user = auth.authenticate(username=username, password=pwd)
         if not user:
             return render(request, 'update_pwd.html', {'msg': '原密码输入错误，请重新输入'})
         elif new_pwd == pwd:

@@ -103,3 +103,7 @@
 2021-04-13 第三十四次提交：crispy-forms设计标签式导航菜单（TabHolder）
     xadmin自定义菜单
     xadmin主题设置
+2021-04-15 第三十五次提交：token认证、权限认证permission
+    setting添加配置
+    url：http://localhost:8000/api/v1/login/
+    url：http://localhost:8000/cards/
