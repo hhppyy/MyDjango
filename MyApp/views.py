@@ -209,11 +209,23 @@ def get_parameter_dic(paramser, *args, **kwargs):
         return result_data
 
 
-class CardSerializer(serializers.HyperlinkedModelSerializer):
+# class CardSerializer(serializers.HyperlinkedModelSerializer):
+#     class Meta:
+#         model = RestCard
+#         fields = "__all__"
+class CardSerializer(serializers.ModelSerializer):
+    #序列化
+    #设置时间格式化 解决时间中带T
+    # add_time=2021-04-16T10:00:03.363600
+    #required=False 设置非必填
+    add_time = serializers.DateTimeField(format='%Y-%m-%d %H:%M:%S',required=False)
+
+    #设置必填项
+    # stock = serializers.IntegerField(required=True)
+
     class Meta:
         model = RestCard
         fields = "__all__"
-
 
 class CardViewSet(viewsets.ModelViewSet):
 

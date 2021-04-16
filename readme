@@ -107,3 +107,8 @@
     setting添加配置
     url：http://localhost:8000/api/v1/login/
     url：http://localhost:8000/cards/
+
+2021-04-16 第三十六次提交：序列化(ModelSerializer)之日期时间格式带T问题及设置必填项
+
+
+
