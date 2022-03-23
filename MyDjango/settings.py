@@ -33,13 +33,13 @@ SECRET_KEY = '+@(c5k=wieekr+po(vw@5)&&!q=(vvptw^k%6y*g4+his-+6j-'
 # ALLOWED_HOSTS是域名访问权限，设置可以访问的域名，默认值为空[], 只允许localhost或127.0.0.1在浏览器上访问。
 # DEBUG 改成False之后，需要重新启动服务，同时需要加个ALLOWED_HOSTS 地址，如果想让所以的域名都能访问，可以设置为：ALLOWED_HOSTS = ["*"]
 
-# DEBUG = False
-#
-# ALLOWED_HOSTS = ['*']
+DEBUG = False
 
-DEBUG = True
+ALLOWED_HOSTS = ['*']
 
-ALLOWED_HOSTS = []
+# DEBUG = True
+
+# ALLOWED_HOSTS = []
 
 
 # Application definition
